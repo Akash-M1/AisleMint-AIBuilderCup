@@ -82,7 +82,7 @@ After the core story, add these proof points:
 
 “React provides the retail workspace. A dedicated Google Cloud Run API serves the hackathon copy, with a separate PostgreSQL database and database user. Gemini handles interpretation and explanations. Python forecasting and optimization engines calculate scenarios, and OneSales executes exact checkout rules. A separate frontend on the AisleMint server uses the hackathon subdomain. We reuse no customer data.”
 
-Use that description only after the Cloud Run deployment is verified. Before activation, call it the planned deployment, not the live architecture.
+This deployment has been verified at **https://aibuildercup.aislemint.com**. The public validation record includes the dedicated Cloud Run revision and actual guest, model, checkout and reset checks.
 
 ## Likely judge questions
 

@@ -146,12 +146,18 @@ def export_template():
  from psycopg.rows import dict_row
  excluded={'schema_versions','assets','asset_versions','asset_blobs','leases','hackathon_limits','retail_users','retail_sessions','retail_login_attempts','retail_keys','pos_sessions','training_jobs','retail_batches'}
  tables=[]
+ # A resumed setup can leave counters for a discarded partial POS store.
+ # Only export counters belonging to the baseline; every cloned counter must
+ # follow a workspace/store ID that the guest namespace transformation owns.
+ scopes=[BASE_WORKSPACE,database().retail_shops.find_one({'_id':BASE_WORKSPACE})['pos_store_id']]
  with pool().connection() as c:
   names=[r[0] for r in c.execute("SELECT tablename FROM pg_tables WHERE schemaname='public'")]
   for name in names:
    if name in excluded:continue
    columns=[(r[0],r[1]) for r in c.execute("SELECT column_name,data_type FROM information_schema.columns WHERE table_schema='public' AND table_name=%s ORDER BY ordinal_position",(name,))]
-   result=c.execute('SELECT * FROM "'+name+'"');rows=[list(r) for r in result]
+   result=(c.execute('SELECT * FROM sequences WHERE split_part(_id,\':\',2)=ANY(%s)',(scopes,))
+           if name=='sequences' else c.execute('SELECT * FROM "'+name+'"'))
+   rows=[list(r) for r in result]
    if rows:tables.append(dict(name=name,columns=[n for n,t in columns],json_columns=[n for n,t in columns if t in ('json','jsonb')],rows=rows))
  from promo.pg_documents import encode
  data=dict(workspace=BASE_WORKSPACE,retailer=BASE_RETAILER,tables=tables,synthetic=True,created=now().isoformat())

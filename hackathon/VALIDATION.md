@@ -27,16 +27,19 @@ npm --prefix aislemint-platform/frontend run build
 
 The verifier creates new synthetic visitor sessions and confirms an oats offer inside its own namespace. It is an integration smoke test, not a read-only health probe. Keep it away from any other database; the application requires `aislemint_hackathon`.
 
-## Public activation checks still required
+## Public deployment verified
 
-At this preparation stage, the public deployment is waiting on runtime-secret/IAM approval. Record the following only after activation:
-
-- HTTPS certificate and hostname routing.
-- Fresh browser: no login, prepared sandbox, all mission links.
-- Dedicated Cloud Run revision and database readiness.
-- Live model badge and trace on the public deployment.
-- Confirmation→POS→demo receipt and reset.
-- A second visitor's independent data.
-- Regular website, platform and tracker health after the additive router change.
+- HTTPS certificate and routing passed at **https://aibuildercup.aislemint.com**. Dedicated Cloud Run revision: `aibuildercup-api-00001-g8p`.
+- The one-time in-region Cloud Run seed job completed successfully. Both models passed the unchanged activation gates; the separate database contains the fictional store and resettable baseline.
+- A fresh browser opened the mission without sign-in. Connected intelligence rendered 8 sources and 1,122 business objects. Oats resolved to its fictional supplier, delayed replenishment, documents and source lineage.
+- Two independent public HTTP sessions loaded promotion/demand summaries, connected evidence, published analytics and OneSales. Preparation plus those checks took 6.07 and 5.92 seconds in this smoke run. Cross-visitor requests and AI-key changes were denied.
+- The public API forecast and confirmed the 15% oats offer. Its checkout total changed from ₹180 to **₹153 including GST**, and an exact-value simulated cash tender created a full receipt. No money was collected.
+- A real public-deployment flyer call returned `ai_powered=true`, **Gemini 3.8 Flash**, and one valid remaining proposal in **7.29 seconds**. This was tested after oats was confirmed, so oats and the pre-approved chips offer could conflict; earlier local pre-confirmation tests had two proposals. Results vary with workspace calendar state and model output.
+- The public merchant assistant returned `gemini_agentic_copilot` with **Gemini 3.8 Flash**, a recorded `inspect_operational_risks` tool call and numbered evidence in **7.82 seconds**. The public AI shopper used **Gemini 3.5 Flash-Lite** and produced a code-priced **₹408** basket against an explicit ₹500 budget in **1.86 seconds**. These are individual smoke measurements, not latency guarantees.
+- Browser inspection confirmed that OneSales opens an active synthetic register without a PIN prompt and displays the catalog, fixed simulation date and AI shopper controls.
+- Reset created a new guest, and the new session was denied access to its old workspace.
+- The initial public smoke test exposed orphan counters from an interrupted seed setup. They were backed up and excluded from the resettable template; the exporter now selects only baseline-scoped counters. The successful two-guest test above followed that repair.
+- The demo proxy forwards the visitor address for anonymous-session quotas, avoiding a shared proxy-address bucket for unrelated judges.
+- Original website, platform health and tracker each returned HTTP **200** after the additive route activation. Their application images and customer data were not replaced.
 
 Do not describe local timing as deployed latency or a single smoke test as a performance benchmark. Do not claim the entire historical regression suite passed; the measured selection and known fixture exclusion are stated above.

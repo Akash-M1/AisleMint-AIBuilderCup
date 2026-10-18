@@ -4,7 +4,7 @@
 
 AisleMint combines Gemini interpretation with retail forecasting, constrained promotion planning, connected operational evidence and exact point-of-sale calculations. This repository contains the complete application source used by the isolated hackathon simulation.
 
-**Activation pending:** the public hostname is not serving this demo yet; runtime-secret/IAM approval is required.
+**Live demo:** [aibuildercup.aislemint.com](https://aibuildercup.aislemint.com). Public HTTPS, anonymous guest workspaces, the Gemini flyer scan, promotion confirmation, checkout receipt and reset have been verified.
 
 Demo domain: **https://aibuildercup.aislemint.com**. Deployment status is recorded in [the deployment notes](hackathon/DEPLOYMENT.md). No sign-in or purchase is required: the app creates an anonymous, browser-scoped synthetic workspace automatically.
 
