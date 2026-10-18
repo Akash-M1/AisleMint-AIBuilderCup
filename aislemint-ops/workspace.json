@@ -1,0 +1,80 @@
+{
+  "schema": 2,
+  "repositories": {
+    "aislemint-platform": {
+      "purpose": "Product launcher and web application composition",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-promotions": {
+      "purpose": "Promotion measurement, scenarios, offers and recommendations",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-demand": {
+      "purpose": "Demand forecasting and inventory planning",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-sales": {
+      "purpose": "OneSales, returns and business analytics",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-data": {
+      "purpose": "Data contracts, shared data products and modelling workbench",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-connect": {
+      "purpose": "Ontology, connectors, evidence and connected decisions",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-core": {
+      "purpose": "Shared runtime, persistence, UI foundations and gateway",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-admin": {
+      "purpose": "Identity, retailer administration and product access",
+      "version": "0.4.0",
+      "release": true
+    },
+    "aislemint-ops": {
+      "purpose": "Composition, delivery, deployment and operational tooling",
+      "version": "0.4.0",
+      "release": false
+    },
+    "aislemint-quality": {
+      "purpose": "Cross-product integration, security and regression tests",
+      "release": true
+    },
+    "aislemint-docs": {
+      "purpose": "Architecture, product and onboarding documentation",
+      "optional": true,
+      "release": false
+    },
+    "aislemint-website": {
+      "purpose": "Independently deployed marketing website",
+      "optional": true,
+      "release": false
+    }
+  },
+  "frontend_modules": {
+    "planning-workspace.tsx": "promotions",
+    "offer-editor.tsx": "promotions",
+    "demand-planner.tsx": "demand",
+    "onesales.tsx": "sales",
+    "pos": "sales",
+    "modelling-workbench.tsx": "data",
+    "data-platform.tsx": "data",
+    "data-platform.css": "data",
+    "connected-intelligence.tsx": "connect",
+    "connected-intelligence.css": "connect",
+    "brand.tsx": "core",
+    "retail-platform.tsx": "core",
+    "retail-platform.css": "core",
+    "ui": "core"
+  }
+}

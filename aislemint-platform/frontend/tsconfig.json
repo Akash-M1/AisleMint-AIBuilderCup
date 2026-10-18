@@ -1,0 +1,105 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": [
+      "node",
+      "@cloudflare/workers-types",
+      "vinext/types"
+    ],
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "paths": {
+      "@aislemint/connect/navigation": [
+        "../../aislemint-connect/frontend/components/navigation.ts"
+      ],
+      "@/components/planning-workspace": [
+        "../../aislemint-promotions/frontend/components/planning-workspace.tsx"
+      ],
+      "@/components/offer-editor": [
+        "../../aislemint-promotions/frontend/components/offer-editor.tsx"
+      ],
+      "@/components/demand-planner": [
+        "../../aislemint-demand/frontend/components/demand-planner.tsx"
+      ],
+      "@/components/onesales": [
+        "../../aislemint-sales/frontend/components/onesales.tsx"
+      ],
+      "@/components/pos": [
+        "../../aislemint-sales/frontend/components/pos"
+      ],
+      "@/components/modelling-workbench": [
+        "../../aislemint-data/frontend/components/modelling-workbench.tsx"
+      ],
+      "@/components/data-platform": [
+        "../../aislemint-data/frontend/components/data-platform.tsx"
+      ],
+      "@/components/connected-intelligence": [
+        "../../aislemint-connect/frontend/components/connected-intelligence.tsx"
+      ],
+      "@/components/brand": [
+        "../../aislemint-core/frontend/components/brand.tsx"
+      ],
+      "@/components/retail-platform": [
+        "../../aislemint-core/frontend/components/retail-platform.tsx"
+      ],
+      "@/components/ui": [
+        "../../aislemint-core/frontend/components/ui"
+      ],
+      "@/components/ui/*": [
+        "../../aislemint-core/frontend/components/ui/*"
+      ],
+      "@/lib/*": [
+        "../../aislemint-core/frontend/lib/*"
+      ],
+      "@/hooks/*": [
+        "../../aislemint-core/frontend/hooks/*"
+      ],
+      "@/*": [
+        "./*"
+      ],
+      "@/components/planning-ui": [
+        "../../aislemint-core/frontend/components/planning-ui.tsx"
+      ],
+      "@/components/benchmark-workbench": [
+        "../../aislemint-data/frontend/components/benchmark-workbench.tsx"
+      ],
+      "@/components/admin-portal": [
+        "../../aislemint-admin/frontend/components/admin-portal.tsx"
+      ],
+      "@/components/business-analytics": [
+        "../../aislemint-sales/frontend/components/business-analytics.tsx"
+      ],
+      "@/styles/data-platform.css": [
+        "../../aislemint-data/frontend/components/data-platform.css"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts",
+    "../../aislemint-*/frontend/**/*.ts",
+    "../../aislemint-*/frontend/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "../../aislemint-*/frontend/node_modules"
+  ]
+}

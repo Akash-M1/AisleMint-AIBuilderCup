@@ -1,0 +1,14 @@
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+.wrangler/
+.release/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.log

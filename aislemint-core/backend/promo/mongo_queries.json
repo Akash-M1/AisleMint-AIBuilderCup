@@ -1,0 +1,7248 @@
+{
+  "api_datasets_aggregate_datasets": {
+    "collection": "datasets",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "quality": "$quality",
+          "status": "$status",
+          "error": "$error",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "quality",
+      "status",
+      "error",
+      "created"
+    ]
+  },
+  "demand_api_sources_aggregate_datasets": {
+    "collection": "datasets",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "status": {
+            "$eq": "ready"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name"
+    ]
+  },
+  "demand_api_sources_aggregate_demand_datasets": {
+    "collection": "demand_datasets",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name"
+    ]
+  },
+  "demand_api_sources_aggregate_demand_jobs": {
+    "collection": "demand_jobs",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$project": {
+          "_id": 0,
+          "source_id": "$source_id",
+          "status": "$status",
+          "error": "$error",
+          "updated": "$updated"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "source_id",
+      "status",
+      "error",
+      "updated"
+    ]
+  },
+  "pos_api_stores_aggregate_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$sort": {
+          "demo": -1,
+          "created": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "demo": "$demo"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "demo"
+    ]
+  },
+  "pos_api_demo_store_aggregate_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "demo": {
+            "$eq": 1
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": 1
+        }
+      },
+      {
+        "$limit": 1
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "address": "$address",
+          "state_code": "$state_code",
+          "gstin": "$gstin",
+          "gst_registered": "$gst_registered",
+          "currency": "$currency",
+          "timezone": "$timezone",
+          "demo": "$demo",
+          "forecast_workspace": "$forecast_workspace",
+          "forecast_store_id": "$forecast_store_id",
+          "promo_reference_date": "$promo_reference_date",
+          "revision": "$revision",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "address",
+      "state_code",
+      "gstin",
+      "gst_registered",
+      "currency",
+      "timezone",
+      "demo",
+      "forecast_workspace",
+      "forecast_store_id",
+      "promo_reference_date",
+      "revision",
+      "created"
+    ]
+  },
+  "promotions_advance_upsert_promotion_calendar_revisions": {
+    "collection": "promotion_calendar_revisions",
+    "operation": "upsert",
+    "values": {
+      "workspace": {
+        "$parameter": 0
+      },
+      "revision": 1
+    },
+    "keys": [
+      "workspace"
+    ],
+    "set": {},
+    "inc": {
+      "revision": 1
+    }
+  },
+  "promotions_confirm_insert_confirmed_promotions": {
+    "collection": "confirmed_promotions",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "status": {
+        "$parameter": 3
+      },
+      "request": {
+        "$parameter": 4
+      },
+      "result": {
+        "$parameter": 5
+      },
+      "review_token": {
+        "$parameter": 6
+      },
+      "idempotency_key": {
+        "$parameter": 7
+      },
+      "created": {
+        "$parameter": 8
+      },
+      "cancelled": {
+        "$parameter": 9
+      },
+      "model_id": {
+        "$parameter": 10
+      }
+    }
+  },
+  "promotions_confirm_insert_promotion_events": {
+    "collection": "promotion_events",
+    "operation": "insert",
+    "values": {
+      "campaign_id": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "store_id": {
+        "$parameter": 2
+      },
+      "product_id": {
+        "$parameter": 3
+      },
+      "period_end": {
+        "$parameter": 4
+      },
+      "discount": {
+        "$parameter": 5
+      },
+      "feature": {
+        "$parameter": 6
+      },
+      "display": {
+        "$parameter": 7
+      },
+      "active": {
+        "$parameter": 8
+      }
+    }
+  },
+  "promotions_confirm_insert_audit": {
+    "collection": "audit",
+    "operation": "insert",
+    "values": {
+      "event": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "payload": {
+        "$parameter": 2
+      },
+      "created": {
+        "$parameter": 3
+      }
+    }
+  },
+  "promotions_revision_aggregate_promotion_calendar_revisions": {
+    "collection": "promotion_calendar_revisions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "workspace": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "revision": "$revision"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "revision"
+    ]
+  },
+  "promotions_cancel_update_confirmed_promotions": {
+    "collection": "confirmed_promotions",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 1
+        }
+      }
+    },
+    "set": {
+      "status": "cancelled",
+      "cancelled": {
+        "$parameter": 0
+      }
+    },
+    "inc": {}
+  },
+  "promotions_cancel_update_promotion_events": {
+    "collection": "promotion_events",
+    "operation": "update",
+    "filter": {
+      "campaign_id": {
+        "$eq": {
+          "$parameter": 0
+        }
+      }
+    },
+    "set": {
+      "active": 0
+    },
+    "inc": {}
+  },
+  "promotions_confirm_aggregate_confirmed_promotions": {
+    "collection": "confirmed_promotions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "workspace": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "idempotency_key": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "workspace": "$workspace",
+          "name": "$name",
+          "status": "$status",
+          "request": "$request",
+          "result": "$result",
+          "review_token": "$review_token",
+          "idempotency_key": "$idempotency_key",
+          "created": "$created",
+          "cancelled": "$cancelled",
+          "model_id": "$model_id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_confirm_aggregate_confirmed_promotions_2": {
+    "collection": "confirmed_promotions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "workspace": "$workspace",
+          "name": "$name",
+          "status": "$status",
+          "request": "$request",
+          "result": "$result",
+          "review_token": "$review_token",
+          "idempotency_key": "$idempotency_key",
+          "created": "$created",
+          "cancelled": "$cancelled",
+          "model_id": "$model_id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_cancel_aggregate_confirmed_promotions": {
+    "collection": "confirmed_promotions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "workspace": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "workspace": "$workspace",
+          "name": "$name",
+          "status": "$status",
+          "request": "$request",
+          "result": "$result",
+          "review_token": "$review_token",
+          "idempotency_key": "$idempotency_key",
+          "created": "$created",
+          "cancelled": "$cancelled",
+          "model_id": "$model_id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_confirmed_promotions": {
+    "collection": "confirmed_promotions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "workspace": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "workspace": "$workspace",
+          "name": "$name",
+          "status": "$status",
+          "request": "$request",
+          "result": "$result",
+          "review_token": "$review_token",
+          "idempotency_key": "$idempotency_key",
+          "created": "$created",
+          "cancelled": "$cancelled",
+          "model_id": "$model_id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_demand_datasets": {
+    "collection": "demand_datasets",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "quality": "$quality"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "quality"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_pos_holidays": {
+    "collection": "pos_holidays",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_stores",
+          "localField": "store_id",
+          "foreignField": "id",
+          "as": "p"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$p",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "p.forecast_workspace": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "$or": [
+                {
+                  "$expr": {
+                    "$eq": [
+                      {
+                        "$parameter": 1
+                      },
+                      {
+                        "$literal": "all"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "p.forecast_store_id": {
+                    "$eq": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "date": "$date",
+          "name": "$name",
+          "store_id": "$p.forecast_store_id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "date",
+      "name",
+      "store_id"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "address": "$address",
+          "state_code": "$state_code",
+          "gstin": "$gstin",
+          "gst_registered": "$gst_registered",
+          "currency": "$currency",
+          "timezone": "$timezone",
+          "demo": "$demo",
+          "forecast_workspace": "$forecast_workspace",
+          "forecast_store_id": "$forecast_store_id",
+          "promo_reference_date": "$promo_reference_date",
+          "revision": "$revision",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "address",
+      "state_code",
+      "gstin",
+      "gst_registered",
+      "currency",
+      "timezone",
+      "demo",
+      "forecast_workspace",
+      "forecast_store_id",
+      "promo_reference_date",
+      "revision",
+      "created"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_pos_holidays_2": {
+    "collection": "pos_holidays",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "date": "$date",
+          "name": "$name"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "date",
+      "name"
+    ]
+  },
+  "pos_learning_queue_job_insert_pos_model_jobs": {
+    "collection": "pos_model_jobs",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "kind": {
+        "$parameter": 2
+      },
+      "status": {
+        "$parameter": 3
+      },
+      "source_id": {
+        "$parameter": 4
+      },
+      "error": {
+        "$parameter": 5
+      },
+      "created": {
+        "$parameter": 6
+      },
+      "updated": {
+        "$parameter": 7
+      }
+    }
+  },
+  "pos_learning_daily_snapshot_aggregate_promotion_events": {
+    "collection": "promotion_events",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "confirmed_promotions",
+          "localField": "campaign_id",
+          "foreignField": "id",
+          "as": "c"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$c",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "$and": [
+                    {
+                      "$and": [
+                        {
+                          "workspace": {
+                            "$eq": {
+                              "$parameter": 0
+                            }
+                          }
+                        },
+                        {
+                          "store_id": {
+                            "$eq": {
+                              "$parameter": 1
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "period_end": {
+                        "$gte": {
+                          "$parameter": 2
+                        },
+                        "$lte": {
+                          "$parameter": 3
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "c.created": {
+                    "$lt": {
+                      "$parameter": 4
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$or": [
+                {
+                  "c.cancelled": null
+                },
+                {
+                  "c.cancelled": {
+                    "$gt": {
+                      "$parameter": 5
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "request": "$c.request"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "request"
+    ]
+  },
+  "pos_learning_daily_snapshot_insert_pos_daily": {
+    "collection": "pos_daily",
+    "operation": "insert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "product_id": {
+        "$parameter": 1
+      },
+      "business_date": {
+        "$parameter": 2
+      },
+      "body": {
+        "$parameter": 3
+      }
+    }
+  },
+  "pos_learning_queue_job_insert_demand_datasets": {
+    "collection": "demand_datasets",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "name": {
+        "$parameter": 1
+      },
+      "quality": {
+        "$parameter": 2
+      },
+      "created": {
+        "$parameter": 3
+      }
+    }
+  },
+  "pos_learning_queue_job_insert_datasets": {
+    "collection": "datasets",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "name": {
+        "$parameter": 1
+      },
+      "quality": {
+        "$parameter": 2
+      },
+      "status": {
+        "$parameter": 3
+      },
+      "error": {
+        "$parameter": 4
+      },
+      "created": {
+        "$parameter": 5
+      }
+    }
+  },
+  "pos_learning_settings_insert_pos_learning_settings": {
+    "collection": "pos_learning_settings",
+    "operation": "insert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "auto_retrain": {
+        "$parameter": 1
+      }
+    },
+    "replace": true
+  },
+  "pos_learning_holiday_insert_pos_holidays": {
+    "collection": "pos_holidays",
+    "operation": "insert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "date": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      }
+    },
+    "replace": true
+  },
+  "pos_learning_holiday_update_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 0
+        }
+      }
+    },
+    "set": {},
+    "inc": {
+      "revision": 1
+    }
+  },
+  "pos_learning_close_day_insert_pos_days": {
+    "collection": "pos_days",
+    "operation": "insert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "business_date": {
+        "$parameter": 1
+      },
+      "closed": {
+        "$parameter": 2
+      },
+      "staff_id": {
+        "$parameter": 3
+      }
+    }
+  },
+  "pos_learning_close_day_insert_pos_drift_checks": {
+    "collection": "pos_drift_checks",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "created": {
+        "$parameter": 2
+      },
+      "event_sequence": {
+        "$parameter": 3
+      },
+      "result": {
+        "$parameter": 4
+      }
+    }
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "$expr": {
+                "$lte": [
+                  {
+                    "$substrCP": [
+                      "$created",
+                      0,
+                      10
+                    ]
+                  },
+                  {
+                    "$parameter": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "barcode": "$barcode",
+          "name": "$name",
+          "category": "$category",
+          "hsn": "$hsn",
+          "unit": "$unit",
+          "price_paise": "$price_paise",
+          "cost_paise": "$cost_paise",
+          "gst_bps": "$gst_bps",
+          "on_hand": "$on_hand",
+          "reorder_level": "$reorder_level",
+          "active": "$active",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "store_id",
+      "product_id",
+      "barcode",
+      "name",
+      "category",
+      "hsn",
+      "unit",
+      "price_paise",
+      "cost_paise",
+      "gst_bps",
+      "on_hand",
+      "reorder_level",
+      "active",
+      "created"
+    ]
+  },
+  "pos_learning_panel_aggregate_pos_daily": {
+    "collection": "pos_daily",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "business_date": 1,
+          "product_id": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "body": "$body"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "body"
+    ]
+  },
+  "pos_learning_queue_job_aggregate_pos_model_jobs": {
+    "collection": "pos_model_jobs",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "kind": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$expr": {
+                "$in": [
+                  "$status",
+                  [
+                    {
+                      "$literal": "queued"
+                    },
+                    {
+                      "$literal": "training"
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "kind": "$kind",
+          "status": "$status",
+          "source_id": "$source_id",
+          "error": "$error",
+          "created": "$created",
+          "updated": "$updated"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "kind",
+      "status",
+      "source_id",
+      "error",
+      "created",
+      "updated"
+    ]
+  },
+  "pos_learning_run_job_update_pos_model_jobs": {
+    "collection": "pos_model_jobs",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 1
+        }
+      }
+    },
+    "set": {
+      "status": "training",
+      "updated": {
+        "$parameter": 0
+      }
+    },
+    "inc": {}
+  },
+  "pos_learning_holiday_update_pos_daily": {
+    "collection": "pos_daily",
+    "operation": "update",
+    "filter": {
+      "$and": [
+        {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            },
+            {
+              "product_id": {
+                "$eq": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "business_date": {
+            "$eq": {
+              "$parameter": 3
+            }
+          }
+        }
+      ]
+    },
+    "set": {
+      "body": {
+        "$parameter": 0
+      }
+    },
+    "inc": {}
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_holidays": {
+    "collection": "pos_holidays",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "date": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_events": {
+    "collection": "pos_events",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "$and": [
+                    {
+                      "store_id": {
+                        "$eq": {
+                          "$parameter": 0
+                        }
+                      }
+                    },
+                    {
+                      "kind": {
+                        "$eq": "product_updated"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "reference_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "created": {
+                "$lt": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "sequence": -1
+        }
+      },
+      {
+        "$limit": 1
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "payload": "$payload"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "payload"
+    ]
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_sale_lines": {
+    "collection": "pos_sale_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "product_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "s.business_date": {
+                "$eq": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "sale_id": "$sale_id",
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "quantity": "$quantity",
+          "paid_paise": "$paid_paise",
+          "net_paise": "$net_paise",
+          "tax_paise": "$tax_paise",
+          "cgst_paise": "$cgst_paise",
+          "sgst_paise": "$sgst_paise",
+          "igst_paise": "$igst_paise",
+          "cost_paise": "$cost_paise",
+          "regular_paise": "$regular_paise",
+          "gst_bps": "$gst_bps",
+          "returned": "$returned",
+          "snapshot": "$s.snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "sale_id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "paid_paise",
+      "net_paise",
+      "tax_paise",
+      "cgst_paise",
+      "sgst_paise",
+      "igst_paise",
+      "cost_paise",
+      "regular_paise",
+      "gst_bps",
+      "returned",
+      "snapshot"
+    ]
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_inventory_movements": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "product_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "business_date": {
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "created": -1,
+          "_sequence": -1
+        }
+      },
+      {
+        "$limit": 1
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "quantity": "$quantity",
+          "balance": "$balance",
+          "kind": "$kind",
+          "reference_id": "$reference_id",
+          "reason": "$reason",
+          "cost_paise": "$cost_paise",
+          "staff_id": "$staff_id",
+          "created": "$created",
+          "business_date": "$business_date",
+          "idempotency_key": "$idempotency_key"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "balance",
+      "kind",
+      "reference_id",
+      "reason",
+      "cost_paise",
+      "staff_id",
+      "created",
+      "business_date",
+      "idempotency_key"
+    ]
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_return_lines": {
+    "collection": "pos_return_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_returns",
+          "localField": "return_id",
+          "foreignField": "id",
+          "as": "r"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$r",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "product_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "r.business_date": {
+                "$eq": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "units": {
+            "$sum": "$quantity"
+          },
+          "net": {
+            "$sum": "$net_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "units": "$units",
+          "net": "$net"
+        }
+      }
+    ],
+    "default": {
+      "units": 0,
+      "net": 0
+    },
+    "fields": [
+      "units",
+      "net"
+    ]
+  },
+  "pos_learning_run_job_update_pos_model_jobs_2": {
+    "collection": "pos_model_jobs",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 1
+        }
+      }
+    },
+    "set": {
+      "status": "ready",
+      "updated": {
+        "$parameter": 0
+      }
+    },
+    "inc": {}
+  },
+  "pos_learning_status_aggregate_pos_learning_settings": {
+    "collection": "pos_learning_settings",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "auto_retrain": "$auto_retrain"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "auto_retrain"
+    ]
+  },
+  "pos_learning_holiday_aggregate_pos_daily": {
+    "collection": "pos_daily",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "body": "$body"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "body"
+    ]
+  },
+  "pos_learning_close_day_aggregate_pos_days": {
+    "collection": "pos_days",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_learning_close_day_aggregate_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "business_date": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "closed": null
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_learning_run_job_aggregate_pos_model_jobs": {
+    "collection": "pos_model_jobs",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "status": {
+                "$eq": "queued"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "kind": "$kind",
+          "status": "$status",
+          "source_id": "$source_id",
+          "error": "$error",
+          "created": "$created",
+          "updated": "$updated"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "kind",
+      "status",
+      "source_id",
+      "error",
+      "created",
+      "updated"
+    ]
+  },
+  "pos_learning_run_job_insert_demand_jobs": {
+    "collection": "demand_jobs",
+    "operation": "insert",
+    "values": {
+      "source_id": {
+        "$parameter": 0
+      },
+      "status": {
+        "$parameter": 1
+      },
+      "error": {
+        "$parameter": 2
+      },
+      "updated": {
+        "$parameter": 3
+      }
+    },
+    "replace": true
+  },
+  "pos_learning_run_job_update_datasets": {
+    "collection": "datasets",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 0
+        }
+      }
+    },
+    "set": {
+      "status": "ready"
+    },
+    "inc": {}
+  },
+  "pos_learning_run_job_update_pos_model_jobs_3": {
+    "collection": "pos_model_jobs",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 2
+        }
+      }
+    },
+    "set": {
+      "status": "failed",
+      "error": {
+        "$parameter": 0
+      },
+      "updated": {
+        "$parameter": 1
+      }
+    },
+    "inc": {}
+  },
+  "pos_learning_close_day_aggregate_pos_events": {
+    "collection": "pos_events",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$max": "$sequence"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_inventory_movements_2": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "$and": [
+                    {
+                      "store_id": {
+                        "$eq": {
+                          "$parameter": 0
+                        }
+                      }
+                    },
+                    {
+                      "product_id": {
+                        "$eq": {
+                          "$parameter": 1
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "business_date": {
+                    "$eq": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "balance": {
+                "$eq": 0
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$limit": 1
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_learning_status_aggregate_pos_model_jobs": {
+    "collection": "pos_model_jobs",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$limit": 20
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "kind": "$kind",
+          "status": "$status",
+          "source_id": "$source_id",
+          "error": "$error",
+          "created": "$created",
+          "updated": "$updated"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "kind",
+      "status",
+      "source_id",
+      "error",
+      "created",
+      "updated"
+    ]
+  },
+  "pos_learning_status_aggregate_pos_holidays": {
+    "collection": "pos_holidays",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "date": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "date": "$date",
+          "name": "$name"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "date",
+      "name"
+    ]
+  },
+  "pos_learning_status_aggregate_pos_days": {
+    "collection": "pos_days",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "business_date": -1
+        }
+      },
+      {
+        "$limit": 40
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "business_date": "$business_date",
+          "closed": "$closed"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "business_date",
+      "closed"
+    ]
+  },
+  "pos_learning_close_day_aggregate_pos_model_jobs": {
+    "collection": "pos_model_jobs",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "kind": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "created": {
+                "$gt": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_returns_complete_return_insert_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "sale_id": {
+        "$parameter": 2
+      },
+      "number": {
+        "$parameter": 3
+      },
+      "shift_id": {
+        "$parameter": 4
+      },
+      "staff_id": {
+        "$parameter": 5
+      },
+      "business_date": {
+        "$parameter": 6
+      },
+      "created": {
+        "$parameter": 7
+      },
+      "net_paise": {
+        "$parameter": 8
+      },
+      "tax_paise": {
+        "$parameter": 9
+      },
+      "total_paise": {
+        "$parameter": 10
+      },
+      "cash_paise": {
+        "$parameter": 11
+      },
+      "restock_cost_paise": {
+        "$parameter": 12
+      },
+      "discard_cost_paise": {
+        "$parameter": 13
+      },
+      "request_hash": {
+        "$parameter": 14
+      },
+      "idempotency_key": {
+        "$parameter": 15
+      },
+      "snapshot": {
+        "$parameter": 16
+      }
+    }
+  },
+  "pos_returns_complete_return_insert_pos_return_lines": {
+    "collection": "pos_return_lines",
+    "operation": "insert",
+    "values": {
+      "return_id": {
+        "$parameter": 0
+      },
+      "line_index": {
+        "$parameter": 1
+      },
+      "store_id": {
+        "$parameter": 2
+      },
+      "product_id": {
+        "$parameter": 3
+      },
+      "quantity": {
+        "$parameter": 4
+      },
+      "disposition": {
+        "$parameter": 5
+      },
+      "net_paise": {
+        "$parameter": 6
+      },
+      "tax_paise": {
+        "$parameter": 7
+      },
+      "cgst_paise": {
+        "$parameter": 8
+      },
+      "sgst_paise": {
+        "$parameter": 9
+      },
+      "igst_paise": {
+        "$parameter": 10
+      },
+      "cost_paise": {
+        "$parameter": 11
+      }
+    }
+  },
+  "pos_returns_complete_return_update_pos_sale_lines": {
+    "collection": "pos_sale_lines",
+    "operation": "update",
+    "filter": {
+      "$and": [
+        {
+          "sale_id": {
+            "$eq": {
+              "$parameter": 1
+            }
+          }
+        },
+        {
+          "product_id": {
+            "$eq": {
+              "$parameter": 2
+            }
+          }
+        }
+      ]
+    },
+    "set": {},
+    "inc": {
+      "returned": {
+        "$parameter": 0
+      }
+    }
+  },
+  "pos_returns_sale_detail_aggregate_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "number": "$number",
+          "shift_id": "$shift_id",
+          "staff_id": "$staff_id",
+          "customer_id": "$customer_id",
+          "business_date": "$business_date",
+          "created": "$created",
+          "subtotal_paise": "$subtotal_paise",
+          "tax_paise": "$tax_paise",
+          "total_paise": "$total_paise",
+          "discount_paise": "$discount_paise",
+          "cogs_paise": "$cogs_paise",
+          "cash_net_paise": "$cash_net_paise",
+          "request_hash": "$request_hash",
+          "idempotency_key": "$idempotency_key",
+          "snapshot": "$snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "number",
+      "shift_id",
+      "staff_id",
+      "customer_id",
+      "business_date",
+      "created",
+      "subtotal_paise",
+      "tax_paise",
+      "total_paise",
+      "discount_paise",
+      "cogs_paise",
+      "cash_net_paise",
+      "request_hash",
+      "idempotency_key",
+      "snapshot"
+    ]
+  },
+  "pos_returns_sale_detail_aggregate_pos_sale_lines": {
+    "collection": "pos_sale_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "sale_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "returned": "$returned"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "returned"
+    ]
+  },
+  "pos_returns_sale_detail_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "sale_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "snapshot": "$snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "snapshot"
+    ]
+  },
+  "pos_returns_complete_return_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "idempotency_key": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "sale_id": "$sale_id",
+          "number": "$number",
+          "shift_id": "$shift_id",
+          "staff_id": "$staff_id",
+          "business_date": "$business_date",
+          "created": "$created",
+          "net_paise": "$net_paise",
+          "tax_paise": "$tax_paise",
+          "total_paise": "$total_paise",
+          "cash_paise": "$cash_paise",
+          "restock_cost_paise": "$restock_cost_paise",
+          "discard_cost_paise": "$discard_cost_paise",
+          "request_hash": "$request_hash",
+          "idempotency_key": "$idempotency_key",
+          "snapshot": "$snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "sale_id",
+      "number",
+      "shift_id",
+      "staff_id",
+      "business_date",
+      "created",
+      "net_paise",
+      "tax_paise",
+      "total_paise",
+      "cash_paise",
+      "restock_cost_paise",
+      "discard_cost_paise",
+      "request_hash",
+      "idempotency_key",
+      "snapshot"
+    ]
+  },
+  "api_audit_insert_audit": {
+    "collection": "audit",
+    "operation": "insert",
+    "values": {
+      "event": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "payload": {
+        "$parameter": 2
+      },
+      "created": {
+        "$parameter": 3
+      }
+    }
+  },
+  "api_save_scenario_insert_scenarios": {
+    "collection": "scenarios",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "request": {
+        "$parameter": 3
+      },
+      "result": {
+        "$parameter": 4
+      },
+      "created": {
+        "$parameter": 5
+      }
+    }
+  },
+  "api_train_job_update_datasets": {
+    "collection": "datasets",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 1
+        }
+      }
+    },
+    "set": {
+      "status": {
+        "$parameter": 0
+      },
+      "error": null
+    },
+    "inc": {}
+  },
+  "api_list_scenarios_aggregate_scenarios": {
+    "collection": "scenarios",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "workspace": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$limit": 100
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "workspace": "$workspace",
+          "name": "$name",
+          "request": "$request",
+          "result": "$result",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "request",
+      "result",
+      "created"
+    ]
+  },
+  "api_export_scenario_aggregate_scenarios": {
+    "collection": "scenarios",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "workspace": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "result": "$result"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "result"
+    ]
+  },
+  "api_audit_trail_aggregate_audit": {
+    "collection": "audit",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "workspace": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "id": -1
+        }
+      },
+      {
+        "$limit": 50
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "event": "$event",
+          "workspace": "$workspace",
+          "payload": "$payload",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "event",
+      "workspace",
+      "payload",
+      "created"
+    ]
+  },
+  "api_train_job_update_datasets_2": {
+    "collection": "datasets",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 2
+        }
+      }
+    },
+    "set": {
+      "status": {
+        "$parameter": 0
+      },
+      "error": {
+        "$parameter": 1
+      }
+    },
+    "inc": {}
+  },
+  "api_get_engine_aggregate_datasets": {
+    "collection": "datasets",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "status": "$status"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "status"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$business_date"
+          },
+          "business_date": {
+            "$first": "$business_date"
+          },
+          "n": {
+            "$sum": 1
+          },
+          "net": {
+            "$sum": "$subtotal_paise"
+          },
+          "cost": {
+            "$sum": "$cogs_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "business_date": "$business_date",
+          "n": "$n",
+          "net": "$net",
+          "cost": "$cost"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "business_date",
+      "n",
+      "net",
+      "cost"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$business_date"
+          },
+          "business_date": {
+            "$first": "$business_date"
+          },
+          "net": {
+            "$sum": "$net_paise"
+          },
+          "cost": {
+            "$sum": "$restock_cost_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "business_date": "$business_date",
+          "net": "$net",
+          "cost": "$cost"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "business_date",
+      "net",
+      "cost"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_inventory_movements": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "business_date": {
+                    "$gte": {
+                      "$parameter": 1
+                    },
+                    "$lte": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "kind": {
+                "$eq": "discard"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$business_date"
+          },
+          "business_date": {
+            "$first": "$business_date"
+          },
+          "loss": {
+            "$sum": {
+              "$multiply": [
+                {
+                  "$multiply": [
+                    -1,
+                    "$quantity"
+                  ]
+                },
+                "$cost_paise"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "business_date": "$business_date",
+          "loss": "$loss"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "business_date",
+      "loss"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sale_lines": {
+    "collection": "pos_sale_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "s.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "s.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$product_id"
+          },
+          "product_id": {
+            "$first": "$product_id"
+          },
+          "units": {
+            "$sum": "$quantity"
+          },
+          "net": {
+            "$sum": "$net_paise"
+          },
+          "cost": {
+            "$sum": {
+              "$multiply": [
+                "$quantity",
+                "$cost_paise"
+              ]
+            }
+          },
+          "discounts": {
+            "$sum": {
+              "$subtract": [
+                "$regular_paise",
+                "$paid_paise"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "units": "$units",
+          "net": "$net",
+          "cost": "$cost",
+          "discounts": "$discounts"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "units",
+      "net",
+      "cost",
+      "discounts"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_return_lines": {
+    "collection": "pos_return_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_returns",
+          "localField": "return_id",
+          "foreignField": "id",
+          "as": "r"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$r",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "r.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "r.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$product_id"
+          },
+          "product_id": {
+            "$first": "$product_id"
+          },
+          "qty": {
+            "$sum": "$quantity"
+          },
+          "net": {
+            "$sum": "$net_paise"
+          },
+          "cost": {
+            "$sum": {
+              "$cond": [
+                {
+                  "$eq": [
+                    "$disposition",
+                    {
+                      "$literal": "restock"
+                    }
+                  ]
+                },
+                {
+                  "$multiply": [
+                    "$quantity",
+                    "$cost_paise"
+                  ]
+                },
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "qty": "$qty",
+          "net": "$net",
+          "cost": "$cost"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "qty",
+      "net",
+      "cost"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sale_lines_2": {
+    "collection": "pos_sale_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "s.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "s.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$gst_bps"
+          },
+          "gst_bps": {
+            "$first": "$gst_bps"
+          },
+          "taxable_paise": {
+            "$sum": "$net_paise"
+          },
+          "cgst_paise": {
+            "$sum": "$cgst_paise"
+          },
+          "sgst_paise": {
+            "$sum": "$sgst_paise"
+          },
+          "igst_paise": {
+            "$sum": "$igst_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "gst_bps": "$gst_bps",
+          "taxable_paise": "$taxable_paise",
+          "cgst_paise": "$cgst_paise",
+          "sgst_paise": "$sgst_paise",
+          "igst_paise": "$igst_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "gst_bps",
+      "taxable_paise",
+      "cgst_paise",
+      "sgst_paise",
+      "igst_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_return_lines_2": {
+    "collection": "pos_return_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_returns",
+          "localField": "return_id",
+          "foreignField": "id",
+          "as": "r"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$r",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "r.sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "r.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "r.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "snapshot": "$s.snapshot",
+          "return_id": "$return_id",
+          "line_index": "$line_index",
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "quantity": "$quantity",
+          "disposition": "$disposition",
+          "net_paise": "$net_paise",
+          "tax_paise": "$tax_paise",
+          "cgst_paise": "$cgst_paise",
+          "sgst_paise": "$sgst_paise",
+          "igst_paise": "$igst_paise",
+          "cost_paise": "$cost_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "snapshot",
+      "return_id",
+      "line_index",
+      "store_id",
+      "product_id",
+      "quantity",
+      "disposition",
+      "net_paise",
+      "tax_paise",
+      "cgst_paise",
+      "sgst_paise",
+      "igst_paise",
+      "cost_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sales_2": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "snapshot": "$snapshot",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "snapshot",
+      "created"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_returns_2": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "snapshot": "$snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "snapshot"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sale_offers": {
+    "collection": "pos_sale_offers",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "s.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "s.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$kind"
+          },
+          "kind": {
+            "$first": "$kind"
+          },
+          "transactions": {
+            "$addToSet": "$sale_id"
+          },
+          "saving_paise": {
+            "$sum": "$saving_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "kind": "$kind",
+          "transactions": {
+            "$size": {
+              "$setDifference": [
+                "$transactions",
+                [
+                  null
+                ]
+              ]
+            }
+          },
+          "saving_paise": "$saving_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "kind",
+      "transactions",
+      "saving_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sales_4": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_customers",
+          "localField": "customer_id",
+          "foreignField": "id",
+          "as": "c"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$c",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$c.id"
+          },
+          "id": {
+            "$first": "$c.id"
+          },
+          "name": {
+            "$first": "$c.name"
+          },
+          "phone": {
+            "$first": "$c.phone"
+          },
+          "visits": {
+            "$sum": 1
+          },
+          "spent_paise": {
+            "$sum": "$total_paise"
+          }
+        }
+      },
+      {
+        "$sort": {
+          "spent_paise": -1
+        }
+      },
+      {
+        "$limit": 20
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "phone": "$phone",
+          "visits": "$visits",
+          "spent_paise": "$spent_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "phone",
+      "visits",
+      "spent_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_staff",
+          "localField": "staff_id",
+          "foreignField": "id",
+          "as": "st"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$st",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "opened": -1
+        }
+      },
+      {
+        "$limit": 100
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "register_id": "$register_id",
+          "cashier": "$st.name",
+          "business_date": "$business_date",
+          "opened": "$opened",
+          "closed": "$closed",
+          "counted_paise": "$counted_paise",
+          "expected_paise": "$expected_paise",
+          "variance_paise": "$variance_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "register_id",
+      "cashier",
+      "business_date",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sales_3": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "transactions": {
+            "$sum": 1
+          },
+          "revenue": {
+            "$sum": "$subtotal_paise"
+          },
+          "collected": {
+            "$sum": "$total_paise"
+          },
+          "gst": {
+            "$sum": "$tax_paise"
+          },
+          "discounts": {
+            "$sum": "$discount_paise"
+          },
+          "cost": {
+            "$sum": "$cogs_paise"
+          },
+          "customers": {
+            "$addToSet": "$customer_id"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "transactions": "$transactions",
+          "revenue": "$revenue",
+          "collected": "$collected",
+          "gst": "$gst",
+          "discounts": "$discounts",
+          "cost": "$cost",
+          "customers": {
+            "$size": {
+              "$setDifference": [
+                "$customers",
+                [
+                  null
+                ]
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "default": {
+      "transactions": 0,
+      "revenue": 0,
+      "collected": 0,
+      "gst": 0,
+      "discounts": 0,
+      "cost": 0,
+      "customers": 0
+    },
+    "fields": [
+      "transactions",
+      "revenue",
+      "collected",
+      "gst",
+      "discounts",
+      "cost",
+      "customers"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_returns_3": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "documents": {
+            "$sum": 1
+          },
+          "net": {
+            "$sum": "$net_paise"
+          },
+          "gst": {
+            "$sum": "$tax_paise"
+          },
+          "gross": {
+            "$sum": "$total_paise"
+          },
+          "restock": {
+            "$sum": "$restock_cost_paise"
+          },
+          "discard": {
+            "$sum": "$discard_cost_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "documents": "$documents",
+          "net": "$net",
+          "gst": "$gst",
+          "gross": "$gross",
+          "restock": "$restock",
+          "discard": "$discard"
+        }
+      }
+    ],
+    "default": {
+      "documents": 0,
+      "net": 0,
+      "gst": 0,
+      "gross": 0,
+      "restock": 0,
+      "discard": 0
+    },
+    "fields": [
+      "documents",
+      "net",
+      "gst",
+      "gross",
+      "restock",
+      "discard"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "name": "$name",
+          "category": "$category",
+          "on_hand": "$on_hand",
+          "reorder_level": "$reorder_level",
+          "price_paise": "$price_paise",
+          "cost_paise": "$cost_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "name",
+      "category",
+      "on_hand",
+      "reorder_level",
+      "price_paise",
+      "cost_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_inventory_movements_2": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "business_date": {
+                    "$gte": {
+                      "$parameter": 1
+                    },
+                    "$lte": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "kind": {
+                "$eq": "discard"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": {
+            "g0": "$product_id"
+          },
+          "product_id": {
+            "$first": "$product_id"
+          },
+          "loss": {
+            "$sum": {
+              "$multiply": [
+                {
+                  "$multiply": [
+                    -1,
+                    "$quantity"
+                  ]
+                },
+                "$cost_paise"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "product_id": "$product_id",
+          "loss": "$loss"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "product_id",
+      "loss"
+    ]
+  },
+  "pos_reports_export_aggregate_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "created": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "number": "$number",
+          "business_date": "$business_date",
+          "created": "$created",
+          "subtotal_paise": "$subtotal_paise",
+          "tax_paise": "$tax_paise",
+          "total_paise": "$total_paise",
+          "discount_paise": "$discount_paise",
+          "cash_net_paise": "$cash_net_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "number",
+      "business_date",
+      "created",
+      "subtotal_paise",
+      "tax_paise",
+      "total_paise",
+      "discount_paise",
+      "cash_net_paise"
+    ]
+  },
+  "pos_reports_export_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "created": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "number": "$number",
+          "original_invoice": "$s.number",
+          "business_date": "$business_date",
+          "net_paise": "$net_paise",
+          "tax_paise": "$tax_paise",
+          "total_paise": "$total_paise",
+          "restock_cost_paise": "$restock_cost_paise",
+          "discard_cost_paise": "$discard_cost_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "number",
+      "original_invoice",
+      "business_date",
+      "net_paise",
+      "tax_paise",
+      "total_paise",
+      "restock_cost_paise",
+      "discard_cost_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_inventory_movements_3": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "business_date": {
+                    "$gte": {
+                      "$parameter": 1
+                    },
+                    "$lte": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "kind": {
+                "$eq": "discard"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": {
+              "$multiply": [
+                {
+                  "$multiply": [
+                    -1,
+                    "$quantity"
+                  ]
+                },
+                "$cost_paise"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_sale_lines_3": {
+    "collection": "pos_sale_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "s.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "s.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$quantity"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_return_lines_3": {
+    "collection": "pos_return_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_returns",
+          "localField": "return_id",
+          "foreignField": "id",
+          "as": "r"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$r",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "r.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "r.business_date": {
+                "$gte": {
+                  "$parameter": 1
+                },
+                "$lte": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$quantity"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_reports_print_return_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "snapshot": "$snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "snapshot"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_returns_4": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "business_date": {
+                    "$gte": {
+                      "$parameter": 1
+                    },
+                    "$lte": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "s.customer_id": {
+                "$eq": {
+                  "$parameter": 3
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$total_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "demand_api_save_insert_inventory_plans": {
+    "collection": "inventory_plans",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "source_id": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "request": {
+        "$parameter": 3
+      },
+      "result": {
+        "$parameter": 4
+      },
+      "created": {
+        "$parameter": 5
+      }
+    }
+  },
+  "demand_api_training_job_update_demand_jobs": {
+    "collection": "demand_jobs",
+    "operation": "update",
+    "filter": {
+      "source_id": {
+        "$eq": {
+          "$parameter": 2
+        }
+      }
+    },
+    "set": {
+      "status": {
+        "$parameter": 0
+      },
+      "error": null,
+      "updated": {
+        "$parameter": 1
+      }
+    },
+    "inc": {}
+  },
+  "demand_api_start_training_insert_demand_jobs": {
+    "collection": "demand_jobs",
+    "operation": "insert",
+    "values": {
+      "source_id": {
+        "$parameter": 0
+      },
+      "status": {
+        "$parameter": 1
+      },
+      "error": {
+        "$parameter": 2
+      },
+      "updated": {
+        "$parameter": 3
+      }
+    },
+    "replace": true
+  },
+  "demand_api_training_job_update_demand_jobs_2": {
+    "collection": "demand_jobs",
+    "operation": "update",
+    "filter": {
+      "source_id": {
+        "$eq": {
+          "$parameter": 3
+        }
+      }
+    },
+    "set": {
+      "status": {
+        "$parameter": 0
+      },
+      "error": {
+        "$parameter": 1
+      },
+      "updated": {
+        "$parameter": 2
+      }
+    },
+    "inc": {}
+  },
+  "demand_api_plans_aggregate_inventory_plans": {
+    "collection": "inventory_plans",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "source_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$limit": 100
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "source_id": "$source_id",
+          "name": "$name",
+          "request": "$request",
+          "result": "$result",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "source_id",
+      "name",
+      "request",
+      "result",
+      "created"
+    ]
+  },
+  "demand_api_export_aggregate_inventory_plans": {
+    "collection": "inventory_plans",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "source_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "result": "$result"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "result"
+    ]
+  },
+  "demand_api_paths_aggregate_demand_datasets": {
+    "collection": "demand_datasets",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id"
+    ]
+  },
+  "pos_api_create_store_insert_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "name": {
+        "$parameter": 1
+      },
+      "address": {
+        "$parameter": 2
+      },
+      "state_code": {
+        "$parameter": 3
+      },
+      "gstin": {
+        "$parameter": 4
+      },
+      "gst_registered": {
+        "$parameter": 5
+      },
+      "demo": {
+        "$parameter": 6
+      },
+      "created": {
+        "$parameter": 7
+      }
+    }
+  },
+  "pos_api_create_store_insert_pos_staff": {
+    "collection": "pos_staff",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "role": {
+        "$parameter": 3
+      },
+      "salt": {
+        "$parameter": 4
+      },
+      "pin_hash": {
+        "$parameter": 5
+      },
+      "created": {
+        "$parameter": 6
+      }
+    }
+  },
+  "pos_api_demo_store_update_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 3
+        }
+      }
+    },
+    "set": {
+      "forecast_workspace": {
+        "$parameter": 0
+      },
+      "forecast_store_id": {
+        "$parameter": 1
+      },
+      "promo_reference_date": {
+        "$parameter": 2
+      }
+    },
+    "inc": {}
+  },
+  "pos_api_logout_delete_pos_sessions": {
+    "collection": "pos_sessions",
+    "operation": "delete",
+    "filter": {
+      "token_hash": {
+        "$eq": {
+          "$parameter": 0
+        }
+      }
+    }
+  },
+  "pos_api_put_product_upsert_pos_products": {
+    "collection": "pos_products",
+    "operation": "upsert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "product_id": {
+        "$parameter": 1
+      },
+      "barcode": {
+        "$parameter": 2
+      },
+      "name": {
+        "$parameter": 3
+      },
+      "category": {
+        "$parameter": 4
+      },
+      "hsn": {
+        "$parameter": 5
+      },
+      "unit": {
+        "$parameter": 6
+      },
+      "price_paise": {
+        "$parameter": 7
+      },
+      "cost_paise": {
+        "$parameter": 8
+      },
+      "gst_bps": {
+        "$parameter": 9
+      },
+      "on_hand": {
+        "$parameter": 10
+      },
+      "reorder_level": {
+        "$parameter": 11
+      },
+      "active": {
+        "$parameter": 12
+      },
+      "created": {
+        "$parameter": 13
+      }
+    },
+    "keys": [
+      "store_id",
+      "product_id"
+    ],
+    "set": {
+      "barcode": {
+        "$parameter": 2
+      },
+      "name": {
+        "$parameter": 3
+      },
+      "hsn": {
+        "$parameter": 5
+      },
+      "unit": {
+        "$parameter": 6
+      },
+      "category": {
+        "$parameter": 4
+      },
+      "price_paise": {
+        "$parameter": 7
+      },
+      "cost_paise": {
+        "$parameter": 8
+      },
+      "gst_bps": {
+        "$parameter": 9
+      },
+      "reorder_level": {
+        "$parameter": 11
+      },
+      "active": {
+        "$parameter": 12
+      }
+    },
+    "inc": {}
+  },
+  "pos_api_save_product_update_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 0
+        }
+      }
+    },
+    "set": {},
+    "inc": {
+      "revision": 1
+    }
+  },
+  "pos_api_customer_upsert_pos_customers": {
+    "collection": "pos_customers",
+    "operation": "upsert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "phone": {
+        "$parameter": 3
+      },
+      "email": {
+        "$parameter": 4
+      },
+      "address": {
+        "$parameter": 5
+      },
+      "state_code": {
+        "$parameter": 6
+      },
+      "gstin": {
+        "$parameter": 7
+      },
+      "created": {
+        "$parameter": 8
+      }
+    },
+    "keys": [
+      "id"
+    ],
+    "set": {
+      "name": {
+        "$parameter": 2
+      },
+      "phone": {
+        "$parameter": 3
+      },
+      "email": {
+        "$parameter": 4
+      },
+      "address": {
+        "$parameter": 5
+      },
+      "state_code": {
+        "$parameter": 6
+      },
+      "gstin": {
+        "$parameter": 7
+      }
+    },
+    "inc": {}
+  },
+  "pos_api_open_shift_insert_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "register_id": {
+        "$parameter": 2
+      },
+      "staff_id": {
+        "$parameter": 3
+      },
+      "business_date": {
+        "$parameter": 4
+      },
+      "opening_paise": {
+        "$parameter": 5
+      },
+      "opened": {
+        "$parameter": 6
+      }
+    }
+  },
+  "pos_api_close_shift_update_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 4
+        }
+      }
+    },
+    "set": {
+      "closed": {
+        "$parameter": 0
+      },
+      "counted_paise": {
+        "$parameter": 1
+      },
+      "expected_paise": {
+        "$parameter": 2
+      },
+      "variance_paise": {
+        "$parameter": 3
+      }
+    },
+    "inc": {}
+  },
+  "pos_api_cash_movement_insert_pos_cash_movements": {
+    "collection": "pos_cash_movements",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "shift_id": {
+        "$parameter": 2
+      },
+      "amount_paise": {
+        "$parameter": 3
+      },
+      "reason": {
+        "$parameter": 4
+      },
+      "staff_id": {
+        "$parameter": 5
+      },
+      "created": {
+        "$parameter": 6
+      }
+    }
+  },
+  "pos_api_park_insert_pos_carts": {
+    "collection": "pos_carts",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "staff_id": {
+        "$parameter": 3
+      },
+      "body": {
+        "$parameter": 4
+      },
+      "created": {
+        "$parameter": 5
+      }
+    }
+  },
+  "pos_api_remove_cart_delete_pos_carts": {
+    "collection": "pos_carts",
+    "operation": "delete",
+    "filter": {
+      "$and": [
+        {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        },
+        {
+          "store_id": {
+            "$eq": {
+              "$parameter": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "pos_api_planning_connection_update_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 3
+        }
+      }
+    },
+    "set": {
+      "forecast_workspace": {
+        "$parameter": 0
+      },
+      "forecast_store_id": {
+        "$parameter": 1
+      },
+      "promo_reference_date": {
+        "$parameter": 2
+      }
+    },
+    "inc": {
+      "revision": 1
+    }
+  },
+  "pos_api_demo_store_insert_pos_products": {
+    "collection": "pos_products",
+    "operation": "insert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "product_id": {
+        "$parameter": 1
+      },
+      "barcode": {
+        "$parameter": 2
+      },
+      "name": {
+        "$parameter": 3
+      },
+      "category": {
+        "$parameter": 4
+      },
+      "hsn": {
+        "$parameter": 5
+      },
+      "unit": {
+        "$parameter": 6
+      },
+      "price_paise": {
+        "$parameter": 7
+      },
+      "cost_paise": {
+        "$parameter": 8
+      },
+      "gst_bps": {
+        "$parameter": 9
+      },
+      "on_hand": {
+        "$parameter": 10
+      },
+      "reorder_level": {
+        "$parameter": 11
+      },
+      "active": {
+        "$parameter": 12
+      },
+      "created": {
+        "$parameter": 13
+      }
+    }
+  },
+  "pos_api_put_product_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "product_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "category": "$category"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "category"
+    ]
+  },
+  "pos_api_login_aggregate_pos_staff": {
+    "collection": "pos_staff",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "active": {
+                "$eq": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "name": "$name",
+          "role": "$role",
+          "salt": "$salt",
+          "pin_hash": "$pin_hash",
+          "active": "$active",
+          "failed_attempts": "$failed_attempts",
+          "locked_until": "$locked_until",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "role",
+      "salt",
+      "pin_hash",
+      "active",
+      "failed_attempts",
+      "locked_until",
+      "created"
+    ]
+  },
+  "pos_api_login_update_pos_staff": {
+    "collection": "pos_staff",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 0
+        }
+      }
+    },
+    "set": {
+      "failed_attempts": 0,
+      "locked_until": null
+    },
+    "inc": {}
+  },
+  "pos_api_context_aggregate_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "closed": null
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "register_id": "$register_id",
+          "staff_id": "$staff_id",
+          "business_date": "$business_date",
+          "opening_paise": "$opening_paise",
+          "opened": "$opened",
+          "closed": "$closed",
+          "counted_paise": "$counted_paise",
+          "expected_paise": "$expected_paise",
+          "variance_paise": "$variance_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ]
+  },
+  "pos_api_products_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "$or": [
+                {
+                  "$or": [
+                    {
+                      "$expr": {
+                        "$regexMatch": {
+                          "input": {
+                            "$ifNull": [
+                              "$name",
+                              ""
+                            ]
+                          },
+                          "regex": {
+                            "$likeParameter": 1
+                          },
+                          "options": "i"
+                        }
+                      }
+                    },
+                    {
+                      "$expr": {
+                        "$regexMatch": {
+                          "input": {
+                            "$ifNull": [
+                              "$barcode",
+                              ""
+                            ]
+                          },
+                          "regex": {
+                            "$likeParameter": 2
+                          },
+                          "options": "i"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$expr": {
+                    "$regexMatch": {
+                      "input": {
+                        "$ifNull": [
+                          "$product_id",
+                          ""
+                        ]
+                      },
+                      "regex": {
+                        "$likeParameter": 3
+                      },
+                      "options": "i"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "active": -1,
+          "category": 1,
+          "name": 1
+        }
+      },
+      {
+        "$limit": 1000
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "barcode": "$barcode",
+          "name": "$name",
+          "category": "$category",
+          "hsn": "$hsn",
+          "unit": "$unit",
+          "price_paise": "$price_paise",
+          "cost_paise": "$cost_paise",
+          "gst_bps": "$gst_bps",
+          "on_hand": "$on_hand",
+          "reorder_level": "$reorder_level",
+          "active": "$active",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "store_id",
+      "product_id",
+      "barcode",
+      "name",
+      "category",
+      "hsn",
+      "unit",
+      "price_paise",
+      "cost_paise",
+      "gst_bps",
+      "on_hand",
+      "reorder_level",
+      "active",
+      "created"
+    ]
+  },
+  "pos_api_put_product_aggregate_pos_sale_lines": {
+    "collection": "pos_sale_lines",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "product_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$limit": 1
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_api_adjust_stock_aggregate_pos_inventory_movements": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "idempotency_key": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "quantity": "$quantity",
+          "balance": "$balance",
+          "kind": "$kind",
+          "reference_id": "$reference_id",
+          "reason": "$reason",
+          "cost_paise": "$cost_paise",
+          "staff_id": "$staff_id",
+          "created": "$created",
+          "business_date": "$business_date",
+          "idempotency_key": "$idempotency_key"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "balance",
+      "kind",
+      "reference_id",
+      "reason",
+      "cost_paise",
+      "staff_id",
+      "created",
+      "business_date",
+      "idempotency_key"
+    ]
+  },
+  "pos_api_adjust_stock_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "product_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "cost_paise": "$cost_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "cost_paise"
+    ]
+  },
+  "pos_api_stock_history_aggregate_pos_inventory_movements": {
+    "collection": "pos_inventory_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "$or": [
+                {
+                  "$expr": {
+                    "$eq": [
+                      {
+                        "$parameter": 1
+                      },
+                      {
+                        "$literal": ""
+                      }
+                    ]
+                  }
+                },
+                {
+                  "product_id": {
+                    "$eq": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$limit": 200
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "quantity": "$quantity",
+          "balance": "$balance",
+          "kind": "$kind",
+          "reference_id": "$reference_id",
+          "reason": "$reason",
+          "cost_paise": "$cost_paise",
+          "staff_id": "$staff_id",
+          "created": "$created",
+          "business_date": "$business_date",
+          "idempotency_key": "$idempotency_key"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "balance",
+      "kind",
+      "reference_id",
+      "reason",
+      "cost_paise",
+      "staff_id",
+      "created",
+      "business_date",
+      "idempotency_key"
+    ]
+  },
+  "pos_api_customers_aggregate_pos_customers": {
+    "collection": "pos_customers",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "$or": [
+                {
+                  "$or": [
+                    {
+                      "$expr": {
+                        "$regexMatch": {
+                          "input": {
+                            "$ifNull": [
+                              "$name",
+                              ""
+                            ]
+                          },
+                          "regex": {
+                            "$likeParameter": 1
+                          },
+                          "options": "i"
+                        }
+                      }
+                    },
+                    {
+                      "$expr": {
+                        "$regexMatch": {
+                          "input": {
+                            "$ifNull": [
+                              "$phone",
+                              ""
+                            ]
+                          },
+                          "regex": {
+                            "$likeParameter": 2
+                          },
+                          "options": "i"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$expr": {
+                    "$regexMatch": {
+                      "input": {
+                        "$ifNull": [
+                          "$email",
+                          ""
+                        ]
+                      },
+                      "regex": {
+                        "$likeParameter": 3
+                      },
+                      "options": "i"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "name": 1
+        }
+      },
+      {
+        "$limit": 100
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "name": "$name",
+          "phone": "$phone",
+          "email": "$email",
+          "address": "$address",
+          "state_code": "$state_code",
+          "gstin": "$gstin",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "state_code",
+      "gstin",
+      "created"
+    ]
+  },
+  "pos_api_customer_history_aggregate_pos_customers": {
+    "collection": "pos_customers",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "name": "$name",
+          "phone": "$phone",
+          "email": "$email",
+          "address": "$address",
+          "state_code": "$state_code",
+          "gstin": "$gstin",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "state_code",
+      "gstin",
+      "created"
+    ]
+  },
+  "pos_api_customer_history_aggregate_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "customer_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$limit": 100
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "number": "$number",
+          "business_date": "$business_date",
+          "total_paise": "$total_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "number",
+      "business_date",
+      "total_paise"
+    ]
+  },
+  "pos_api_customer_history_aggregate_pos_sales_2": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "customer_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "visits": {
+            "$sum": 1
+          },
+          "spent": {
+            "$sum": "$total_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "visits": "$visits",
+          "spent": "$spent"
+        }
+      }
+    ],
+    "default": {
+      "visits": 0,
+      "spent": 0
+    },
+    "fields": [
+      "visits",
+      "spent"
+    ]
+  },
+  "pos_api_context_aggregate_pos_days": {
+    "collection": "pos_days",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_api_open_shift_aggregate_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "register_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "closed": null
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "register_id": "$register_id",
+          "staff_id": "$staff_id",
+          "business_date": "$business_date",
+          "opening_paise": "$opening_paise",
+          "opened": "$opened",
+          "closed": "$closed",
+          "counted_paise": "$counted_paise",
+          "expected_paise": "$expected_paise",
+          "variance_paise": "$variance_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ]
+  },
+  "pos_api_close_shift_aggregate_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "register_id": "$register_id",
+          "staff_id": "$staff_id",
+          "business_date": "$business_date",
+          "opening_paise": "$opening_paise",
+          "opened": "$opened",
+          "closed": "$closed",
+          "counted_paise": "$counted_paise",
+          "expected_paise": "$expected_paise",
+          "variance_paise": "$variance_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ]
+  },
+  "pos_api_parked_aggregate_pos_carts": {
+    "collection": "pos_carts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "created": -1
+        }
+      },
+      {
+        "$limit": 50
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "name": "$name",
+          "staff_id": "$staff_id",
+          "body": "$body",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "staff_id",
+      "body",
+      "created"
+    ]
+  },
+  "pos_api_event_history_aggregate_pos_events": {
+    "collection": "pos_events",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$sort": {
+          "sequence": -1
+        }
+      },
+      {
+        "$limit": 200
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "sequence": "$sequence",
+          "store_id": "$store_id",
+          "kind": "$kind",
+          "reference_id": "$reference_id",
+          "payload": "$payload",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "sequence",
+      "store_id",
+      "kind",
+      "reference_id",
+      "payload",
+      "created"
+    ]
+  },
+  "pos_api_stores_aggregate_pos_staff": {
+    "collection": "pos_staff",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "active": {
+                "$eq": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "role": "$role"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "role"
+    ]
+  },
+  "pos_api_login_update_pos_staff_2": {
+    "collection": "pos_staff",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 2
+        }
+      }
+    },
+    "set": {
+      "failed_attempts": {
+        "$parameter": 0
+      },
+      "locked_until": {
+        "$parameter": 1
+      }
+    },
+    "inc": {}
+  },
+  "pos_api_customer_history_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_sales",
+          "localField": "sale_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "s.store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "s.customer_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$total_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_api_demo_store_aggregate_pos_staff": {
+    "collection": "pos_staff",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "role": {
+                    "$eq": "manager"
+                  }
+                }
+              ]
+            },
+            {
+              "active": {
+                "$eq": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$limit": 1
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "role": "$role"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "role"
+    ]
+  },
+  "pos_api_customer_aggregate_pos_customers": {
+    "collection": "pos_customers",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_core_session_for_insert_pos_sessions": {
+    "collection": "pos_sessions",
+    "operation": "insert",
+    "values": {
+      "token_hash": {
+        "$parameter": 0
+      },
+      "staff_id": {
+        "$parameter": 1
+      },
+      "expires": {
+        "$parameter": 2
+      }
+    }
+  },
+  "pos_core_audit_event_insert_pos_events": {
+    "collection": "pos_events",
+    "operation": "insert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "kind": {
+        "$parameter": 1
+      },
+      "reference_id": {
+        "$parameter": 2
+      },
+      "payload": {
+        "$parameter": 3
+      },
+      "created": {
+        "$parameter": 4
+      }
+    }
+  },
+  "pos_core_next_number_upsert_pos_counters": {
+    "collection": "pos_counters",
+    "operation": "upsert",
+    "values": {
+      "store_id": {
+        "$parameter": 0
+      },
+      "financial_year": {
+        "$parameter": 1
+      },
+      "kind": {
+        "$parameter": 2
+      },
+      "value": 1
+    },
+    "keys": [
+      "store_id",
+      "financial_year",
+      "kind"
+    ],
+    "set": {},
+    "inc": {
+      "value": 1
+    }
+  },
+  "pos_core_stock_move_update_pos_products": {
+    "collection": "pos_products",
+    "operation": "update",
+    "filter": {
+      "$and": [
+        {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            },
+            {
+              "product_id": {
+                "$eq": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$expr": {
+            "$gte": [
+              {
+                "$add": [
+                  "$on_hand",
+                  {
+                    "$parameter": 3
+                  }
+                ]
+              },
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "set": {},
+    "inc": {
+      "on_hand": {
+        "$parameter": 0
+      }
+    }
+  },
+  "pos_core_stock_move_insert_pos_inventory_movements": {
+    "collection": "pos_inventory_movements",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "product_id": {
+        "$parameter": 2
+      },
+      "quantity": {
+        "$parameter": 3
+      },
+      "balance": {
+        "$parameter": 4
+      },
+      "kind": {
+        "$parameter": 5
+      },
+      "reference_id": {
+        "$parameter": 6
+      },
+      "reason": {
+        "$parameter": 7
+      },
+      "cost_paise": {
+        "$parameter": 8
+      },
+      "staff_id": {
+        "$parameter": 9
+      },
+      "created": {
+        "$parameter": 10
+      },
+      "business_date": {
+        "$parameter": 11
+      },
+      "idempotency_key": {
+        "$parameter": 12
+      }
+    }
+  },
+  "pos_core_complete_sale_insert_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "number": {
+        "$parameter": 2
+      },
+      "shift_id": {
+        "$parameter": 3
+      },
+      "staff_id": {
+        "$parameter": 4
+      },
+      "customer_id": {
+        "$parameter": 5
+      },
+      "business_date": {
+        "$parameter": 6
+      },
+      "created": {
+        "$parameter": 7
+      },
+      "subtotal_paise": {
+        "$parameter": 8
+      },
+      "tax_paise": {
+        "$parameter": 9
+      },
+      "total_paise": {
+        "$parameter": 10
+      },
+      "discount_paise": {
+        "$parameter": 11
+      },
+      "cogs_paise": {
+        "$parameter": 12
+      },
+      "cash_net_paise": {
+        "$parameter": 13
+      },
+      "request_hash": {
+        "$parameter": 14
+      },
+      "idempotency_key": {
+        "$parameter": 15
+      },
+      "snapshot": {
+        "$parameter": 16
+      }
+    }
+  },
+  "pos_core_complete_sale_insert_pos_sale_lines": {
+    "collection": "pos_sale_lines",
+    "operation": "insert",
+    "values": {
+      "sale_id": {
+        "$parameter": 0
+      },
+      "store_id": {
+        "$parameter": 1
+      },
+      "product_id": {
+        "$parameter": 2
+      },
+      "quantity": {
+        "$parameter": 3
+      },
+      "paid_paise": {
+        "$parameter": 4
+      },
+      "net_paise": {
+        "$parameter": 5
+      },
+      "tax_paise": {
+        "$parameter": 6
+      },
+      "cgst_paise": {
+        "$parameter": 7
+      },
+      "sgst_paise": {
+        "$parameter": 8
+      },
+      "igst_paise": {
+        "$parameter": 9
+      },
+      "cost_paise": {
+        "$parameter": 10
+      },
+      "regular_paise": {
+        "$parameter": 11
+      },
+      "gst_bps": {
+        "$parameter": 12
+      },
+      "returned": 0
+    }
+  },
+  "pos_core_complete_sale_insert_pos_sale_offers": {
+    "collection": "pos_sale_offers",
+    "operation": "insert",
+    "values": {
+      "sale_id": {
+        "$parameter": 0
+      },
+      "line_index": {
+        "$parameter": 1
+      },
+      "store_id": {
+        "$parameter": 2
+      },
+      "product_id": {
+        "$parameter": 3
+      },
+      "kind": {
+        "$parameter": 4
+      },
+      "saving_paise": {
+        "$parameter": 5
+      },
+      "body": {
+        "$parameter": 6
+      }
+    }
+  },
+  "pos_core_store_row_aggregate_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "name": "$name",
+          "address": "$address",
+          "state_code": "$state_code",
+          "gstin": "$gstin",
+          "gst_registered": "$gst_registered",
+          "currency": "$currency",
+          "timezone": "$timezone",
+          "demo": "$demo",
+          "forecast_workspace": "$forecast_workspace",
+          "forecast_store_id": "$forecast_store_id",
+          "promo_reference_date": "$promo_reference_date",
+          "revision": "$revision",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "address",
+      "state_code",
+      "gstin",
+      "gst_registered",
+      "currency",
+      "timezone",
+      "demo",
+      "forecast_workspace",
+      "forecast_store_id",
+      "promo_reference_date",
+      "revision",
+      "created"
+    ]
+  },
+  "pos_core_authorize_aggregate_pos_sessions": {
+    "collection": "pos_sessions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "pos_staff",
+          "localField": "staff_id",
+          "foreignField": "id",
+          "as": "s"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$s",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "token_hash": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "expires": {
+                    "$gt": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "s.active": {
+                "$eq": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$s.id",
+          "name": "$s.name",
+          "role": "$s.role",
+          "store_id": "$s.store_id"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "name",
+      "role",
+      "store_id"
+    ]
+  },
+  "pos_core_require_shift_aggregate_pos_shifts": {
+    "collection": "pos_shifts",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "closed": null
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "register_id": "$register_id",
+          "staff_id": "$staff_id",
+          "business_date": "$business_date",
+          "opening_paise": "$opening_paise",
+          "opened": "$opened",
+          "closed": "$closed",
+          "counted_paise": "$counted_paise",
+          "expected_paise": "$expected_paise",
+          "variance_paise": "$variance_paise"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ]
+  },
+  "pos_core_require_shift_aggregate_pos_days": {
+    "collection": "pos_days",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "business_date": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": 1
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_core_executed_offers_aggregate_promotion_events": {
+    "collection": "promotion_events",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "confirmed_promotions",
+          "localField": "campaign_id",
+          "foreignField": "id",
+          "as": "c"
+        }
+      },
+      {
+        "$unwind": {
+          "path": "$c",
+          "preserveNullAndEmptyArrays": false
+        }
+      },
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "$and": [
+                    {
+                      "$and": [
+                        {
+                          "workspace": {
+                            "$eq": {
+                              "$parameter": 0
+                            }
+                          }
+                        },
+                        {
+                          "store_id": {
+                            "$eq": {
+                              "$parameter": 1
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "active": {
+                        "$eq": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "period_end": {
+                    "$gte": {
+                      "$parameter": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "period_end": {
+                "$lte": {
+                  "$parameter": 3
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$sort": {
+          "product_id": 1,
+          "campaign_id": 1
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "campaign_id": "$campaign_id",
+          "workspace": "$workspace",
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "period_end": "$period_end",
+          "discount": "$discount",
+          "feature": "$feature",
+          "display": "$display",
+          "active": "$active",
+          "name": "$c.name",
+          "request": "$c.request"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "campaign_id",
+      "workspace",
+      "store_id",
+      "product_id",
+      "period_end",
+      "discount",
+      "feature",
+      "display",
+      "active",
+      "name",
+      "request"
+    ]
+  },
+  "pos_core_executed_offers_aggregate_promotion_calendar_revisions": {
+    "collection": "promotion_calendar_revisions",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "workspace": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "revision": "$revision"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "revision"
+    ]
+  },
+  "pos_core_quote_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "store_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "store_id": "$store_id",
+          "product_id": "$product_id",
+          "barcode": "$barcode",
+          "name": "$name",
+          "category": "$category",
+          "hsn": "$hsn",
+          "unit": "$unit",
+          "price_paise": "$price_paise",
+          "cost_paise": "$cost_paise",
+          "gst_bps": "$gst_bps",
+          "on_hand": "$on_hand",
+          "reorder_level": "$reorder_level",
+          "active": "$active",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "store_id",
+      "product_id",
+      "barcode",
+      "name",
+      "category",
+      "hsn",
+      "unit",
+      "price_paise",
+      "cost_paise",
+      "gst_bps",
+      "on_hand",
+      "reorder_level",
+      "active",
+      "created"
+    ]
+  },
+  "pos_core_complete_sale_aggregate_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "idempotency_key": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "number": "$number",
+          "shift_id": "$shift_id",
+          "staff_id": "$staff_id",
+          "customer_id": "$customer_id",
+          "business_date": "$business_date",
+          "created": "$created",
+          "subtotal_paise": "$subtotal_paise",
+          "tax_paise": "$tax_paise",
+          "total_paise": "$total_paise",
+          "discount_paise": "$discount_paise",
+          "cogs_paise": "$cogs_paise",
+          "cash_net_paise": "$cash_net_paise",
+          "request_hash": "$request_hash",
+          "idempotency_key": "$idempotency_key",
+          "snapshot": "$snapshot"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "number",
+      "shift_id",
+      "staff_id",
+      "customer_id",
+      "business_date",
+      "created",
+      "subtotal_paise",
+      "tax_paise",
+      "total_paise",
+      "discount_paise",
+      "cogs_paise",
+      "cash_net_paise",
+      "request_hash",
+      "idempotency_key",
+      "snapshot"
+    ]
+  },
+  "pos_core_next_number_aggregate_pos_counters": {
+    "collection": "pos_counters",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "$and": [
+                {
+                  "store_id": {
+                    "$eq": {
+                      "$parameter": 0
+                    }
+                  }
+                },
+                {
+                  "financial_year": {
+                    "$eq": {
+                      "$parameter": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "kind": {
+                "$eq": {
+                  "$parameter": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_core_stock_move_aggregate_pos_products": {
+    "collection": "pos_products",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "product_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "on_hand": "$on_hand"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "on_hand"
+    ]
+  },
+  "pos_core_quote_aggregate_pos_customers": {
+    "collection": "pos_customers",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "$and": [
+            {
+              "id": {
+                "$eq": {
+                  "$parameter": 0
+                }
+              }
+            },
+            {
+              "store_id": {
+                "$eq": {
+                  "$parameter": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id": "$id",
+          "store_id": "$store_id",
+          "name": "$name",
+          "phone": "$phone",
+          "email": "$email",
+          "address": "$address",
+          "state_code": "$state_code",
+          "gstin": "$gstin",
+          "created": "$created"
+        }
+      }
+    ],
+    "default": null,
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "state_code",
+      "gstin",
+      "created"
+    ]
+  },
+  "pos_core_expected_cash_aggregate_pos_sales": {
+    "collection": "pos_sales",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "shift_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$cash_net_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_core_expected_cash_aggregate_pos_returns": {
+    "collection": "pos_returns",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "shift_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$cash_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_core_expected_cash_aggregate_pos_cash_movements": {
+    "collection": "pos_cash_movements",
+    "operation": "aggregate",
+    "pipeline": [
+      {
+        "$match": {
+          "shift_id": {
+            "$eq": {
+              "$parameter": 0
+            }
+          }
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "value": {
+            "$sum": "$amount_paise"
+          }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "value": "$value"
+        }
+      }
+    ],
+    "default": {
+      "value": 0
+    },
+    "fields": [
+      "value"
+    ]
+  },
+  "pos_install_offer_update_pos_stores": {
+    "collection": "pos_stores",
+    "operation": "update",
+    "filter": {
+      "id": {
+        "$eq": {
+          "$parameter": 2
+        }
+      }
+    },
+    "set": {
+      "forecast_workspace": {
+        "$parameter": 0
+      },
+      "forecast_store_id": {
+        "$parameter": 1
+      }
+    },
+    "inc": {}
+  },
+  "pos_install_offer_insert_confirmed_promotions": {
+    "collection": "confirmed_promotions",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "status": {
+        "$parameter": 3
+      },
+      "request": {
+        "$parameter": 4
+      },
+      "result": {
+        "$parameter": 5
+      },
+      "review_token": {
+        "$parameter": 6
+      },
+      "idempotency_key": {
+        "$parameter": 7
+      },
+      "created": {
+        "$parameter": 8
+      },
+      "cancelled": {
+        "$parameter": 9
+      },
+      "model_id": {
+        "$parameter": 10
+      }
+    }
+  },
+  "pos_install_offer_insert_promotion_events": {
+    "collection": "promotion_events",
+    "operation": "insert",
+    "values": {
+      "campaign_id": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "store_id": {
+        "$parameter": 2
+      },
+      "product_id": {
+        "$parameter": 3
+      },
+      "period_end": {
+        "$parameter": 4
+      },
+      "discount": {
+        "$parameter": 5
+      },
+      "feature": {
+        "$parameter": 6
+      },
+      "display": {
+        "$parameter": 7
+      },
+      "active": {
+        "$parameter": 8
+      }
+    }
+  },
+  "pos_install_offer_insert_promotion_calendar_revisions": {
+    "collection": "promotion_calendar_revisions",
+    "operation": "insert",
+    "values": {
+      "workspace": {
+        "$parameter": 0
+      },
+      "revision": {
+        "$parameter": 1
+      }
+    }
+  },
+  "pos_test_confirmed_conditional_offer_and_promotion_safe_return_update_promotion_events": {
+    "collection": "promotion_events",
+    "operation": "update",
+    "filter": {},
+    "set": {
+      "active": 0
+    },
+    "inc": {}
+  },
+  "pos_test_confirmed_conditional_offer_and_promotion_safe_return_update_promotion_calendar_revisions": {
+    "collection": "promotion_calendar_revisions",
+    "operation": "update",
+    "filter": {},
+    "set": {
+      "revision": 2
+    },
+    "inc": {}
+  },
+  "pos_test_daily_model_links_to_current_pos_calendar_insert_demand_datasets": {
+    "collection": "demand_datasets",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "name": {
+        "$parameter": 1
+      },
+      "quality": {
+        "$parameter": 2
+      },
+      "created": {
+        "$parameter": 3
+      }
+    }
+  },
+  "data_api_test_legacy_snapshot_is_preserved_when_recalculated_insert_scenarios": {
+    "collection": "scenarios",
+    "operation": "insert",
+    "values": {
+      "id": {
+        "$parameter": 0
+      },
+      "workspace": {
+        "$parameter": 1
+      },
+      "name": {
+        "$parameter": 2
+      },
+      "request": {
+        "$parameter": 3
+      },
+      "result": {
+        "$parameter": 4
+      },
+      "created": {
+        "$parameter": 5
+      }
+    }
+  }
+}

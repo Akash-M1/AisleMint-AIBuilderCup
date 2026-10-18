@@ -1,0 +1,214 @@
+.admin-management {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 32px 72px;
+  color: var(--foreground);
+}
+.admin-management > header,
+.iam-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.admin-management h1 {
+  font-size: 34px;
+  letter-spacing: -1px;
+}
+.admin-management h2 {
+  font-size: 23px;
+  letter-spacing: -0.6px;
+}
+.admin-management h3 {
+  font-size: 18px;
+  margin: 18px 0 12px;
+}
+.admin-management p {
+  color: #65786f;
+  line-height: 1.65;
+}
+.admin-management > fieldset > form,
+.admin-management > fieldset > section,
+.admin-management > fieldset > details,
+.iam-panel {
+  padding: 24px;
+  border: 1px solid #dce6df;
+  background: white;
+  border-radius: 16px;
+  margin: 22px 0;
+}
+.admin-management button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: 1px solid #d3dfd7;
+  border-radius: 9px;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+.admin-management button.retail-primary {
+  background: #217860;
+  color: white;
+  border-color: #217860;
+}
+.admin-management button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.admin-management details {
+  border-top: 1px solid #dce6df;
+  margin-top: 22px;
+  padding-top: 20px;
+}
+.admin-management summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.admin-management input,
+.admin-management select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd9d0;
+  border-radius: 8px;
+  background: white;
+  min-width: 0;
+}
+.admin-management fieldset {
+  border: 0;
+  min-width: 0;
+  padding: 0;
+}
+.iam-heading p {
+  margin-top: 8px;
+  max-width: 620px;
+}
+.iam-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f5f8f4;
+  border: 1px solid #dce6df;
+  border-radius: 10px;
+  padding: 6px 12px;
+}
+.iam-search input {
+  background: transparent;
+  border: none;
+}
+.iam-accounts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+.iam-accounts .iam-account {
+  justify-content: flex-start;
+  text-align: left;
+  padding: 15px;
+  min-width: 0;
+}
+.iam-account.selected {
+  border-color: #217860;
+  background: #f0f8f0;
+}
+.iam-account strong,
+.iam-account small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.iam-account small {
+  font-size: 12px;
+  color: #637369;
+  margin-top: 4px;
+}
+.iam-avatar {
+  flex-shrink: 0;
+  background: #eaf2e9;
+  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  color: #217860;
+}
+.iam-tag {
+  margin-left: auto;
+  font-size: 11px;
+  white-space: nowrap;
+  color: #637369;
+}
+.iam-editor {
+  margin-top: 24px;
+  padding: 22px;
+  background: #f5f8f4;
+  border-radius: 12px;
+}
+.iam-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 22px;
+}
+.iam-role-guide {
+  font-size: 12px;
+  margin: 12px 0 22px;
+}
+.iam-role-guide p {
+  margin: 5px 0;
+}
+.iam-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.iam-actions .iam-danger {
+  color: #a63c2c;
+  margin-left: auto;
+}
+.iam-audit > div {
+  padding: 14px 0;
+  border-bottom: 1px solid #e2e9e3;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.iam-audit small {
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+.iam-audit span {
+  margin-left: auto;
+  color: #637369;
+  font-size: 12px;
+}
+.retail-admin-link {
+  font-size: 12px;
+  color: #285b49;
+  text-decoration: none;
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .admin-management {
+    padding: 24px 16px;
+  }
+  .iam-heading {
+    flex-direction: column;
+  }
+  .iam-accounts,
+  .iam-matrix {
+    grid-template-columns: 1fr;
+  }
+  .admin-management > fieldset > form,
+  .iam-panel {
+    padding: 16px;
+  }
+  .iam-account .iam-tag {
+    display: none;
+  }
+}
+
+.admin-tabs{display:flex;gap:22px;border-bottom:1px solid #dbe5d6;margin-bottom:28px;overflow-x:auto}.admin-management .admin-tabs button{border:0;border-radius:0;border-bottom:2px solid transparent;padding:12px 0;background:transparent;white-space:nowrap;color:#788c6e}.admin-management .admin-tabs button[aria-current=page]{color:#285738;border-bottom-color:#285738;font-weight:600}

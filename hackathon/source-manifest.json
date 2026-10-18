@@ -1,0 +1,52 @@
+{
+  "aislemint-core": {
+    "source_commit": "7a5035990ed44ca47fd0c910a11e870738fe7cdc",
+    "files": 95,
+    "working_tree_snapshot": true
+  },
+  "aislemint-admin": {
+    "source_commit": "cbd1704ce7d032e58d1705bcea15109de879b15a",
+    "files": 11,
+    "working_tree_snapshot": true
+  },
+  "aislemint-promotions": {
+    "source_commit": "95b0501a7b392d3015b038e49c17d912ac568f61",
+    "files": 13,
+    "working_tree_snapshot": true
+  },
+  "aislemint-demand": {
+    "source_commit": "314368a85e0169a69d6db5b8d29fe63aeb7cf454",
+    "files": 7,
+    "working_tree_snapshot": true
+  },
+  "aislemint-sales": {
+    "source_commit": "d4974a9e2d4384aab90d49c3d7009b39d48ca157",
+    "files": 17,
+    "working_tree_snapshot": true
+  },
+  "aislemint-data": {
+    "source_commit": "094248a5e7349d8817b51fb5c526b1b9b5041390",
+    "files": 17,
+    "working_tree_snapshot": true
+  },
+  "aislemint-connect": {
+    "source_commit": "dbc1553994dbb4d12875ca60638e09a946b0fe41",
+    "files": 13,
+    "working_tree_snapshot": true
+  },
+  "aislemint-platform": {
+    "source_commit": "c0747c65f10a89ea5cff0564a82c46dbb66b8dce",
+    "files": 25,
+    "working_tree_snapshot": true
+  },
+  "aislemint-quality": {
+    "source_commit": "b804cba95af965600186f04b5c10ddc70010e035",
+    "files": 29,
+    "working_tree_snapshot": true
+  },
+  "aislemint-ops": {
+    "source_commit": "f955904a4e0fd257e84b230a12afa5474d8a1de3",
+    "files": 5,
+    "working_tree_snapshot": true
+  }
+}

@@ -1,0 +1,1512 @@
+{
+  "api_audit_insert_audit": {
+    "sql": "INSERT INTO audit (event, workspace, payload, created) VALUES ($1, $2, $3, $4)",
+    "fields": null,
+    "default": null
+  },
+  "api_audit_trail_aggregate_audit": {
+    "sql": "SELECT id, event, workspace, payload, created FROM audit WHERE audit.workspace = $1 ORDER BY id DESC LIMIT 50",
+    "fields": [
+      "id",
+      "event",
+      "workspace",
+      "payload",
+      "created"
+    ],
+    "default": null
+  },
+  "api_datasets_aggregate_datasets": {
+    "sql": "SELECT id, name, quality, status, error, created FROM datasets ORDER BY created DESC",
+    "fields": [
+      "id",
+      "name",
+      "quality",
+      "status",
+      "error",
+      "created"
+    ],
+    "default": null
+  },
+  "api_export_scenario_aggregate_scenarios": {
+    "sql": "SELECT result FROM scenarios WHERE (scenarios.id = $1 AND scenarios.workspace = $2)",
+    "fields": [
+      "result"
+    ],
+    "default": null
+  },
+  "api_get_engine_aggregate_datasets": {
+    "sql": "SELECT status FROM datasets WHERE datasets.id = $1",
+    "fields": [
+      "status"
+    ],
+    "default": null
+  },
+  "api_list_scenarios_aggregate_scenarios": {
+    "sql": "SELECT id, workspace, name, request, result, created FROM scenarios WHERE scenarios.workspace = $1 ORDER BY created DESC LIMIT 100",
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "request",
+      "result",
+      "created"
+    ],
+    "default": null
+  },
+  "api_save_scenario_insert_scenarios": {
+    "sql": "INSERT INTO scenarios (id, workspace, name, request, result, created) VALUES ($1, $2, $3, $4, $5, $6)",
+    "fields": null,
+    "default": null
+  },
+  "api_train_job_update_datasets": {
+    "sql": "UPDATE datasets SET status = $1, error IS NULL WHERE id = $2",
+    "fields": null,
+    "default": null
+  },
+  "api_train_job_update_datasets_2": {
+    "sql": "UPDATE datasets SET status = $1, error = $2 WHERE id = $3",
+    "fields": null,
+    "default": null
+  },
+  "data_api_test_legacy_snapshot_is_preserved_when_recalculated_insert_scenarios": {
+    "sql": "INSERT INTO scenarios (id, workspace, name, request, result, created) VALUES ($1, $2, $3, $4, $5, $6)",
+    "fields": null,
+    "default": null
+  },
+  "demand_api_export_aggregate_inventory_plans": {
+    "sql": "SELECT result FROM inventory_plans WHERE (inventory_plans.id = $1 AND inventory_plans.source_id = $2)",
+    "fields": [
+      "result"
+    ],
+    "default": null
+  },
+  "demand_api_paths_aggregate_demand_datasets": {
+    "sql": "SELECT id FROM demand_datasets WHERE demand_datasets.id = $1",
+    "fields": [
+      "id"
+    ],
+    "default": null
+  },
+  "demand_api_plans_aggregate_inventory_plans": {
+    "sql": "SELECT id, source_id, name, request, result, created FROM inventory_plans WHERE inventory_plans.source_id = $1 ORDER BY created DESC LIMIT 100",
+    "fields": [
+      "id",
+      "source_id",
+      "name",
+      "request",
+      "result",
+      "created"
+    ],
+    "default": null
+  },
+  "demand_api_save_insert_inventory_plans": {
+    "sql": "INSERT INTO inventory_plans (id, source_id, name, request, result, created) VALUES ($1, $2, $3, $4, $5, $6)",
+    "fields": null,
+    "default": null
+  },
+  "demand_api_sources_aggregate_datasets": {
+    "sql": "SELECT id, name FROM datasets WHERE datasets.status = 'ready'",
+    "fields": [
+      "id",
+      "name"
+    ],
+    "default": null
+  },
+  "demand_api_sources_aggregate_demand_datasets": {
+    "sql": "SELECT id, name FROM demand_datasets ORDER BY created DESC",
+    "fields": [
+      "id",
+      "name"
+    ],
+    "default": null
+  },
+  "demand_api_sources_aggregate_demand_jobs": {
+    "sql": "SELECT source_id, status, error, updated FROM demand_jobs",
+    "fields": [
+      "source_id",
+      "status",
+      "error",
+      "updated"
+    ],
+    "default": null
+  },
+  "demand_api_start_training_insert_demand_jobs": {
+    "sql": "INSERT INTO demand_jobs (source_id, status, error, updated) VALUES ($1, $2, $3, $4)",
+    "fields": null,
+    "default": null
+  },
+  "demand_api_training_job_update_demand_jobs": {
+    "sql": "UPDATE demand_jobs SET status = $1, error IS NULL, updated = $2 WHERE source_id = $3",
+    "fields": null,
+    "default": null
+  },
+  "demand_api_training_job_update_demand_jobs_2": {
+    "sql": "UPDATE demand_jobs SET status = $1, error = $2, updated = $3 WHERE source_id = $4",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_adjust_stock_aggregate_pos_inventory_movements": {
+    "sql": "SELECT id, store_id, product_id, quantity, balance, kind, reference_id, reason, cost_paise, staff_id, created, business_date, idempotency_key FROM pos_inventory_movements WHERE (pos_inventory_movements.store_id = $1 AND pos_inventory_movements.idempotency_key = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "balance",
+      "kind",
+      "reference_id",
+      "reason",
+      "cost_paise",
+      "staff_id",
+      "created",
+      "business_date",
+      "idempotency_key"
+    ],
+    "default": null
+  },
+  "pos_api_adjust_stock_aggregate_pos_products": {
+    "sql": "SELECT cost_paise FROM pos_products WHERE (pos_products.store_id = $1 AND pos_products.product_id = $2)",
+    "fields": [
+      "cost_paise"
+    ],
+    "default": null
+  },
+  "pos_api_cash_movement_insert_pos_cash_movements": {
+    "sql": "INSERT INTO pos_cash_movements (id, store_id, shift_id, amount_paise, reason, staff_id, created) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_close_shift_aggregate_pos_shifts": {
+    "sql": "SELECT id, store_id, register_id, staff_id, business_date, opening_paise, opened, closed, counted_paise, expected_paise, variance_paise FROM pos_shifts WHERE (pos_shifts.id = $1 AND pos_shifts.store_id = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ],
+    "default": null
+  },
+  "pos_api_close_shift_update_pos_shifts": {
+    "sql": "UPDATE pos_shifts SET closed = $1, counted_paise = $2, expected_paise = $3, variance_paise = $4 WHERE id = $5",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_context_aggregate_pos_days": {
+    "sql": "SELECT 1 AS value FROM pos_days WHERE (pos_days.store_id = $1 AND pos_days.business_date = $2)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_api_context_aggregate_pos_shifts": {
+    "sql": "SELECT id, store_id, register_id, staff_id, business_date, opening_paise, opened, closed, counted_paise, expected_paise, variance_paise FROM pos_shifts WHERE (pos_shifts.store_id = $1 AND pos_shifts.closed IS NULL)",
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ],
+    "default": null
+  },
+  "pos_api_create_store_insert_pos_staff": {
+    "sql": "INSERT INTO pos_staff (id, store_id, name, role, salt, pin_hash, created) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_create_store_insert_pos_stores": {
+    "sql": "INSERT INTO pos_stores (id, name, address, state_code, gstin, gst_registered, demo, created) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_customer_aggregate_pos_customers": {
+    "sql": "SELECT 1 AS value FROM pos_customers WHERE (pos_customers.id = $1 AND pos_customers.store_id = $2)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_api_customer_history_aggregate_pos_customers": {
+    "sql": "SELECT id, store_id, name, phone, email, address, state_code, gstin, created FROM pos_customers WHERE (pos_customers.id = $1 AND pos_customers.store_id = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "state_code",
+      "gstin",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_customer_history_aggregate_pos_returns": {
+    "sql": "SELECT COALESCE(SUM(r.total_paise),0) AS value FROM pos_returns r JOIN pos_sales s ON r.sale_id=s.id WHERE s.store_id=$1 AND s.customer_id=$2",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_api_customer_history_aggregate_pos_sales": {
+    "sql": "SELECT id, number, business_date, total_paise FROM pos_sales WHERE (pos_sales.store_id = $1 AND pos_sales.customer_id = $2) ORDER BY created DESC LIMIT 100",
+    "fields": [
+      "id",
+      "number",
+      "business_date",
+      "total_paise"
+    ],
+    "default": null
+  },
+  "pos_api_customer_history_aggregate_pos_sales_2": {
+    "sql": "SELECT COUNT(*) AS visits, COALESCE(SUM(total_paise),0) AS spent FROM pos_sales WHERE (pos_sales.store_id = $1 AND pos_sales.customer_id = $2)",
+    "fields": [
+      "visits",
+      "spent"
+    ],
+    "default": {
+      "visits": 0,
+      "spent": 0
+    }
+  },
+  "pos_api_customer_upsert_pos_customers": {
+    "sql": "INSERT INTO pos_customers (id, store_id, name, phone, email, address, state_code, gstin, created) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, phone = EXCLUDED.phone, email = EXCLUDED.email, address = EXCLUDED.address, state_code = EXCLUDED.state_code, gstin = EXCLUDED.gstin",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_customers_aggregate_pos_customers": {
+    "sql": "SELECT id, store_id, name, phone, email, address, state_code, gstin, created FROM pos_customers WHERE (pos_customers.store_id = $1 AND ((COALESCE(name, '') ILIKE $2 OR COALESCE(phone, '') ILIKE $3) OR COALESCE(email, '') ILIKE $4)) ORDER BY name ASC LIMIT 100",
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "state_code",
+      "gstin",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_demo_store_aggregate_pos_staff": {
+    "sql": "SELECT id, name, role FROM pos_staff WHERE ((pos_staff.store_id = $1 AND pos_staff.role = 'manager') AND pos_staff.active = 1) LIMIT 1",
+    "fields": [
+      "id",
+      "name",
+      "role"
+    ],
+    "default": null
+  },
+  "pos_api_demo_store_aggregate_pos_stores": {
+    "sql": "SELECT id, name, address, state_code, gstin, gst_registered, currency, timezone, demo, forecast_workspace, forecast_store_id, promo_reference_date, revision, created FROM pos_stores WHERE pos_stores.demo = 1 ORDER BY created ASC LIMIT 1",
+    "fields": [
+      "id",
+      "name",
+      "address",
+      "state_code",
+      "gstin",
+      "gst_registered",
+      "currency",
+      "timezone",
+      "demo",
+      "forecast_workspace",
+      "forecast_store_id",
+      "promo_reference_date",
+      "revision",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_demo_store_insert_pos_products": {
+    "sql": "INSERT INTO pos_products (store_id, product_id, barcode, name, category, hsn, unit, price_paise, cost_paise, gst_bps, on_hand, reorder_level, active, created) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_demo_store_update_pos_stores": {
+    "sql": "UPDATE pos_stores SET forecast_workspace = $1, forecast_store_id = $2, promo_reference_date = $3 WHERE id = $4",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_event_history_aggregate_pos_events": {
+    "sql": "SELECT sequence, store_id, kind, reference_id, payload, created FROM pos_events WHERE pos_events.store_id = $1 ORDER BY sequence DESC LIMIT 200",
+    "fields": [
+      "sequence",
+      "store_id",
+      "kind",
+      "reference_id",
+      "payload",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_login_aggregate_pos_staff": {
+    "sql": "SELECT id, store_id, name, role, salt, pin_hash, active, failed_attempts, locked_until, created FROM pos_staff WHERE ((pos_staff.id = $1 AND pos_staff.store_id = $2) AND pos_staff.active = 1)",
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "role",
+      "salt",
+      "pin_hash",
+      "active",
+      "failed_attempts",
+      "locked_until",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_login_update_pos_staff": {
+    "sql": "UPDATE pos_staff SET failed_attempts = 0, locked_until IS NULL WHERE id = $1",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_login_update_pos_staff_2": {
+    "sql": "UPDATE pos_staff SET failed_attempts = $1, locked_until = $2 WHERE id = $3",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_logout_delete_pos_sessions": {
+    "sql": "DELETE FROM pos_sessions WHERE token_hash = $1",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_open_shift_aggregate_pos_shifts": {
+    "sql": "SELECT id, store_id, register_id, staff_id, business_date, opening_paise, opened, closed, counted_paise, expected_paise, variance_paise FROM pos_shifts WHERE ((pos_shifts.store_id = $1 AND pos_shifts.register_id = $2) AND pos_shifts.closed IS NULL)",
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ],
+    "default": null
+  },
+  "pos_api_open_shift_insert_pos_shifts": {
+    "sql": "INSERT INTO pos_shifts (id, store_id, register_id, staff_id, business_date, opening_paise, opened) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_park_insert_pos_carts": {
+    "sql": "INSERT INTO pos_carts (id, store_id, name, staff_id, body, created) VALUES ($1, $2, $3, $4, $5, $6)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_parked_aggregate_pos_carts": {
+    "sql": "SELECT id, store_id, name, staff_id, body, created FROM pos_carts WHERE pos_carts.store_id = $1 ORDER BY created DESC LIMIT 50",
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "staff_id",
+      "body",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_planning_connection_update_pos_stores": {
+    "sql": "UPDATE pos_stores SET forecast_workspace = $1, forecast_store_id = $2, promo_reference_date = $3, revision = pos_stores.revision + 1 WHERE id = $4",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_products_aggregate_pos_products": {
+    "sql": "SELECT store_id, product_id, barcode, name, category, hsn, unit, price_paise, cost_paise, gst_bps, on_hand, reorder_level, active, created FROM pos_products WHERE (pos_products.store_id = $1 AND ((COALESCE(name, '') ILIKE $2 OR COALESCE(barcode, '') ILIKE $3) OR COALESCE(product_id, '') ILIKE $4)) ORDER BY active DESC, category ASC, name ASC LIMIT 1000",
+    "fields": [
+      "store_id",
+      "product_id",
+      "barcode",
+      "name",
+      "category",
+      "hsn",
+      "unit",
+      "price_paise",
+      "cost_paise",
+      "gst_bps",
+      "on_hand",
+      "reorder_level",
+      "active",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_api_put_product_aggregate_pos_products": {
+    "sql": "SELECT category FROM pos_products WHERE (pos_products.store_id = $1 AND pos_products.product_id = $2)",
+    "fields": [
+      "category"
+    ],
+    "default": null
+  },
+  "pos_api_put_product_aggregate_pos_sale_lines": {
+    "sql": "SELECT 1 AS value FROM pos_sale_lines WHERE (pos_sale_lines.store_id = $1 AND pos_sale_lines.product_id = $2) LIMIT 1",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_api_put_product_upsert_pos_products": {
+    "sql": "INSERT INTO pos_products (store_id, product_id, barcode, name, category, hsn, unit, price_paise, cost_paise, gst_bps, on_hand, reorder_level, active, created) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) ON CONFLICT (store_id, product_id) DO UPDATE SET barcode = EXCLUDED.barcode, name = EXCLUDED.name, hsn = EXCLUDED.hsn, unit = EXCLUDED.unit, category = EXCLUDED.category, price_paise = EXCLUDED.price_paise, cost_paise = EXCLUDED.cost_paise, gst_bps = EXCLUDED.gst_bps, reorder_level = EXCLUDED.reorder_level, active = EXCLUDED.active",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_remove_cart_delete_pos_carts": {
+    "sql": "DELETE FROM pos_carts WHERE (id = $1 AND store_id = $2)",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_save_product_update_pos_stores": {
+    "sql": "UPDATE pos_stores SET revision = pos_stores.revision + 1 WHERE id = $1",
+    "fields": null,
+    "default": null
+  },
+  "pos_api_stock_history_aggregate_pos_inventory_movements": {
+    "sql": "SELECT id, store_id, product_id, quantity, balance, kind, reference_id, reason, cost_paise, staff_id, created, business_date, idempotency_key FROM pos_inventory_movements WHERE (store_id = $1 AND ($2 = '' OR product_id = $3)) ORDER BY created DESC LIMIT 200",
+    "fields": [
+      "id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "balance",
+      "kind",
+      "reference_id",
+      "reason",
+      "cost_paise",
+      "staff_id",
+      "created",
+      "business_date",
+      "idempotency_key"
+    ],
+    "default": null
+  },
+  "pos_api_stores_aggregate_pos_staff": {
+    "sql": "SELECT id, name, role FROM pos_staff WHERE (store_id = $1 AND active = 1)",
+    "fields": [
+      "id",
+      "name",
+      "role"
+    ],
+    "default": null
+  },
+  "pos_api_stores_aggregate_pos_stores": {
+    "sql": "SELECT id, name, demo FROM pos_stores ORDER BY demo DESC, created ASC",
+    "fields": [
+      "id",
+      "name",
+      "demo"
+    ],
+    "default": null
+  },
+  "pos_core_audit_event_insert_pos_events": {
+    "sql": "INSERT INTO pos_events (store_id, kind, reference_id, payload, created) VALUES ($1, $2, $3, $4, $5)",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_authorize_aggregate_pos_sessions": {
+    "sql": "SELECT s.id AS id, s.name AS name, s.role AS role, s.store_id AS store_id FROM pos_sessions LEFT JOIN pos_staff AS s ON pos_sessions.staff_id = s.id WHERE ((token_hash = $1 AND expires > $2) AND s.active = 1)",
+    "fields": [
+      "id",
+      "name",
+      "role",
+      "store_id"
+    ],
+    "default": null
+  },
+  "pos_core_complete_sale_aggregate_pos_sales": {
+    "sql": "SELECT id, store_id, number, shift_id, staff_id, customer_id, business_date, created, subtotal_paise, tax_paise, total_paise, discount_paise, cogs_paise, cash_net_paise, request_hash, idempotency_key, snapshot::text FROM pos_sales WHERE (store_id = $1 AND idempotency_key = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "number",
+      "shift_id",
+      "staff_id",
+      "customer_id",
+      "business_date",
+      "created",
+      "subtotal_paise",
+      "tax_paise",
+      "total_paise",
+      "discount_paise",
+      "cogs_paise",
+      "cash_net_paise",
+      "request_hash",
+      "idempotency_key",
+      "snapshot"
+    ],
+    "default": null
+  },
+  "pos_core_complete_sale_insert_pos_sale_lines": {
+    "sql": "INSERT INTO pos_sale_lines (sale_id, store_id, product_id, quantity, paid_paise, net_paise, tax_paise, cgst_paise, sgst_paise, igst_paise, cost_paise, regular_paise, gst_bps, returned) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 0)",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_complete_sale_insert_pos_sale_offers": {
+    "sql": "INSERT INTO pos_sale_offers (sale_id, line_index, store_id, product_id, kind, saving_paise, body) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_complete_sale_insert_pos_sales": {
+    "sql": "INSERT INTO pos_sales (id, store_id, number, shift_id, staff_id, customer_id, business_date, created, subtotal_paise, tax_paise, total_paise, discount_paise, cogs_paise, cash_net_paise, request_hash, idempotency_key, snapshot) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_executed_offers_aggregate_promotion_calendar_revisions": {
+    "sql": "SELECT revision FROM promotion_calendar_revisions WHERE workspace = $1",
+    "fields": [
+      "revision"
+    ],
+    "default": null
+  },
+  "pos_core_executed_offers_aggregate_promotion_events": {
+    "sql": "SELECT e.campaign_id,e.workspace,e.store_id,e.product_id,e.period_end,e.discount,e.feature,e.display,e.active,c.name,c.request FROM promotion_events e JOIN confirmed_promotions c ON c.id=e.campaign_id WHERE e.workspace=$1 AND e.store_id=$2 AND e.active=1 AND e.period_end BETWEEN $3 AND $4 ORDER BY e.product_id,e.campaign_id",
+    "fields": [
+      "campaign_id",
+      "workspace",
+      "store_id",
+      "product_id",
+      "period_end",
+      "discount",
+      "feature",
+      "display",
+      "active",
+      "name",
+      "request"
+    ],
+    "default": null
+  },
+  "pos_core_expected_cash_aggregate_pos_cash_movements": {
+    "sql": "SELECT COALESCE(SUM(amount_paise),0) AS value FROM pos_cash_movements WHERE shift_id=$1",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_core_expected_cash_aggregate_pos_returns": {
+    "sql": "SELECT COALESCE(SUM(cash_paise),0) AS value FROM pos_returns WHERE shift_id=$1",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_core_expected_cash_aggregate_pos_sales": {
+    "sql": "SELECT COALESCE(SUM(cash_net_paise),0) AS value FROM pos_sales WHERE shift_id=$1",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_core_next_number_aggregate_pos_counters": {
+    "sql": "SELECT value FROM pos_counters WHERE ((store_id = $1 AND financial_year = $2) AND kind = $3)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_core_next_number_upsert_pos_counters": {
+    "sql": "INSERT INTO pos_counters () VALUES () ON CONFLICT (store_id, financial_year, kind) DO UPDATE SET value = pos_counters.value + 1",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_quote_aggregate_pos_customers": {
+    "sql": "SELECT id, store_id, name, phone, email, address, state_code, gstin, created FROM pos_customers WHERE (id = $1 AND store_id = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "state_code",
+      "gstin",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_core_quote_aggregate_pos_products": {
+    "sql": "SELECT store_id, product_id, barcode, name, category, hsn, unit, price_paise, cost_paise, gst_bps, on_hand, reorder_level, active, created FROM pos_products WHERE store_id = $1",
+    "fields": [
+      "store_id",
+      "product_id",
+      "barcode",
+      "name",
+      "category",
+      "hsn",
+      "unit",
+      "price_paise",
+      "cost_paise",
+      "gst_bps",
+      "on_hand",
+      "reorder_level",
+      "active",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_core_require_shift_aggregate_pos_days": {
+    "sql": "SELECT 1 AS value FROM pos_days WHERE (store_id = $1 AND business_date = $2)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_core_require_shift_aggregate_pos_shifts": {
+    "sql": "SELECT id, store_id, register_id, staff_id, business_date, opening_paise, opened, closed, counted_paise, expected_paise, variance_paise FROM pos_shifts WHERE ((id = $1 AND store_id = $2) AND closed IS NULL)",
+    "fields": [
+      "id",
+      "store_id",
+      "register_id",
+      "staff_id",
+      "business_date",
+      "opening_paise",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ],
+    "default": null
+  },
+  "pos_core_session_for_insert_pos_sessions": {
+    "sql": "INSERT INTO pos_sessions (token_hash, staff_id, expires) VALUES ($1, $2, $3)",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_stock_move_aggregate_pos_products": {
+    "sql": "SELECT on_hand FROM pos_products WHERE (store_id = $1 AND product_id = $2)",
+    "fields": [
+      "on_hand"
+    ],
+    "default": null
+  },
+  "pos_core_stock_move_insert_pos_inventory_movements": {
+    "sql": "INSERT INTO pos_inventory_movements (id, store_id, product_id, quantity, balance, kind, reference_id, reason, cost_paise, staff_id, created, business_date, idempotency_key) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_stock_move_update_pos_products": {
+    "sql": "UPDATE pos_products SET on_hand = on_hand + $1 WHERE ((store_id = $2 AND product_id = $3) AND $expr >= [{'$add': ['$on_hand', {'$parameter': 3}]}, 0])",
+    "fields": [],
+    "default": null
+  },
+  "pos_core_store_row_aggregate_pos_stores": {
+    "sql": "SELECT id, name, address, state_code, gstin, gst_registered, currency, timezone, demo, forecast_workspace, forecast_store_id, promo_reference_date, revision, created FROM pos_stores WHERE id = $1",
+    "fields": [
+      "id",
+      "name",
+      "address",
+      "state_code",
+      "gstin",
+      "gst_registered",
+      "currency",
+      "timezone",
+      "demo",
+      "forecast_workspace",
+      "forecast_store_id",
+      "promo_reference_date",
+      "revision",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_install_offer_insert_confirmed_promotions": {
+    "sql": "INSERT INTO confirmed_promotions (id, workspace, name, status, request, result, review_token, idempotency_key, created, cancelled, model_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)",
+    "fields": [],
+    "default": null
+  },
+  "pos_install_offer_insert_promotion_calendar_revisions": {
+    "sql": "INSERT INTO promotion_calendar_revisions (workspace, revision) VALUES ($1, $2)",
+    "fields": [],
+    "default": null
+  },
+  "pos_install_offer_insert_promotion_events": {
+    "sql": "INSERT INTO promotion_events (campaign_id, workspace, store_id, product_id, period_end, discount, feature, display, active) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+    "fields": [],
+    "default": null
+  },
+  "pos_install_offer_update_pos_stores": {
+    "sql": "UPDATE pos_stores SET forecast_workspace = $1, forecast_store_id = $2 WHERE id = $3",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_close_day_aggregate_pos_days": {
+    "sql": "SELECT 1 AS value FROM pos_days WHERE (store_id = $1 AND business_date = $2)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_learning_close_day_aggregate_pos_events": {
+    "sql": "SELECT COALESCE(MAX(sequence),0) AS value FROM pos_events WHERE store_id=$1",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_learning_close_day_aggregate_pos_model_jobs": {
+    "sql": "SELECT 1 AS value FROM pos_model_jobs WHERE ((store_id = $1 AND kind = $2) AND created > $3)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_learning_close_day_aggregate_pos_shifts": {
+    "sql": "SELECT 1 AS value FROM pos_shifts WHERE ((store_id = $1 AND business_date = $2) AND closed IS NULL)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_learning_close_day_insert_pos_days": {
+    "sql": "INSERT INTO pos_days (store_id, business_date, closed, staff_id) VALUES ($1, $2, $3, $4)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_close_day_insert_pos_drift_checks": {
+    "sql": "INSERT INTO pos_drift_checks (id, store_id, created, event_sequence, result) VALUES ($1, $2, $3, $4, $5)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_events": {
+    "sql": "SELECT payload::text FROM pos_events WHERE (((store_id = $1 AND kind = 'product_updated') AND reference_id = $2) AND created < $3) ORDER BY sequence DESC LIMIT 1",
+    "fields": [
+      "payload"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_holidays": {
+    "sql": "SELECT 1 AS value FROM pos_holidays WHERE (store_id = $1 AND date = $2)",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_inventory_movements": {
+    "sql": "SELECT id, store_id, product_id, quantity, balance, kind, reference_id, reason, cost_paise, staff_id, created, business_date, idempotency_key FROM pos_inventory_movements WHERE ((store_id = $1 AND product_id = $2) AND business_date <= $3) ORDER BY created DESC, _sequence DESC LIMIT 1",
+    "fields": [
+      "id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "balance",
+      "kind",
+      "reference_id",
+      "reason",
+      "cost_paise",
+      "staff_id",
+      "created",
+      "business_date",
+      "idempotency_key"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_inventory_movements_2": {
+    "sql": "SELECT 1 AS value FROM pos_inventory_movements WHERE (((store_id = $1 AND product_id = $2) AND business_date = $3) AND balance = 0) LIMIT 1",
+    "fields": [
+      "value"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_products": {
+    "sql": "SELECT p.store_id,p.product_id,p.barcode,p.name,p.category,p.hsn,p.unit,p.price_paise,p.cost_paise,p.gst_bps,p.on_hand,p.reorder_level,p.active,p.created FROM pos_products p WHERE p.store_id=$1 AND left(p.created,10)<=$2",
+    "fields": [
+      "store_id",
+      "product_id",
+      "barcode",
+      "name",
+      "category",
+      "hsn",
+      "unit",
+      "price_paise",
+      "cost_paise",
+      "gst_bps",
+      "on_hand",
+      "reorder_level",
+      "active",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_return_lines": {
+    "sql": "SELECT COALESCE(SUM(l.quantity),0) AS units,COALESCE(SUM(l.net_paise),0) AS net FROM pos_return_lines l JOIN pos_returns r ON r.id=l.return_id WHERE l.store_id=$1 AND l.product_id=$2 AND r.business_date=$3",
+    "fields": [
+      "units",
+      "net"
+    ],
+    "default": {
+      "units": 0,
+      "net": 0
+    }
+  },
+  "pos_learning_daily_snapshot_aggregate_pos_sale_lines": {
+    "sql": "SELECT l.sale_id,l.store_id,l.product_id,l.quantity,l.paid_paise,l.net_paise,l.tax_paise,l.cgst_paise,l.sgst_paise,l.igst_paise,l.cost_paise,l.regular_paise,l.gst_bps,l.returned,s.snapshot FROM pos_sale_lines l JOIN pos_sales s ON s.id=l.sale_id WHERE l.store_id=$1 AND l.product_id=$2 AND s.business_date=$3",
+    "fields": [
+      "sale_id",
+      "store_id",
+      "product_id",
+      "quantity",
+      "paid_paise",
+      "net_paise",
+      "tax_paise",
+      "cgst_paise",
+      "sgst_paise",
+      "igst_paise",
+      "cost_paise",
+      "regular_paise",
+      "gst_bps",
+      "returned",
+      "snapshot"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_aggregate_promotion_events": {
+    "sql": "SELECT e.product_id,c.request FROM promotion_events e JOIN confirmed_promotions c ON c.id=e.campaign_id WHERE e.workspace=$1 AND e.store_id=$2 AND e.period_end BETWEEN $3 AND $4 AND c.created<$5 AND (c.cancelled IS NULL OR c.cancelled>$6)",
+    "fields": [
+      "product_id",
+      "request"
+    ],
+    "default": null
+  },
+  "pos_learning_daily_snapshot_insert_pos_daily": {
+    "sql": "INSERT INTO pos_daily (store_id, product_id, business_date, body) VALUES ($1, $2, $3, $4)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_holiday_aggregate_pos_daily": {
+    "sql": "SELECT product_id, body::text FROM pos_daily WHERE (store_id = $1 AND business_date = $2)",
+    "fields": [
+      "product_id",
+      "body"
+    ],
+    "default": null
+  },
+  "pos_learning_holiday_insert_pos_holidays": {
+    "sql": "INSERT INTO pos_holidays (store_id, date, name) VALUES ($1, $2, $3) ON CONFLICT (id) DO UPDATE SET store_id = EXCLUDED.store_id, date = EXCLUDED.date, name = EXCLUDED.name",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_holiday_update_pos_daily": {
+    "sql": "UPDATE pos_daily SET body = $1 WHERE ((store_id = $2 AND product_id = $3) AND business_date = $4)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_holiday_update_pos_stores": {
+    "sql": "UPDATE pos_stores SET revision = revision + 1 WHERE id = $1",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_panel_aggregate_pos_daily": {
+    "sql": "SELECT body::text FROM pos_daily WHERE store_id = $1 ORDER BY business_date ASC, product_id ASC",
+    "fields": [
+      "body"
+    ],
+    "default": null
+  },
+  "pos_learning_queue_job_aggregate_pos_model_jobs": {
+    "sql": "SELECT id, store_id, kind, status, source_id, error, created, updated FROM pos_model_jobs WHERE ((store_id = $1 AND kind = $2) AND '$status' IN ('queued', 'training'))",
+    "fields": [
+      "id",
+      "store_id",
+      "kind",
+      "status",
+      "source_id",
+      "error",
+      "created",
+      "updated"
+    ],
+    "default": null
+  },
+  "pos_learning_queue_job_insert_datasets": {
+    "sql": "INSERT INTO datasets (id, name, quality, status, error, created) VALUES ($1, $2, $3, $4, $5, $6)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_queue_job_insert_demand_datasets": {
+    "sql": "INSERT INTO demand_datasets (id, name, quality, created) VALUES ($1, $2, $3, $4)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_queue_job_insert_pos_model_jobs": {
+    "sql": "INSERT INTO pos_model_jobs (id, store_id, kind, status, source_id, error, created, updated) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_run_job_aggregate_pos_model_jobs": {
+    "sql": "SELECT id, store_id, kind, status, source_id, error, created, updated FROM pos_model_jobs WHERE (id = $1 AND status = 'queued')",
+    "fields": [
+      "id",
+      "store_id",
+      "kind",
+      "status",
+      "source_id",
+      "error",
+      "created",
+      "updated"
+    ],
+    "default": null
+  },
+  "pos_learning_run_job_insert_demand_jobs": {
+    "sql": "INSERT INTO demand_jobs (source_id, status, error, updated) VALUES ($1, $2, $3, $4) ON CONFLICT (id) DO UPDATE SET source_id = EXCLUDED.source_id, status = EXCLUDED.status, error = EXCLUDED.error, updated = EXCLUDED.updated",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_run_job_update_datasets": {
+    "sql": "UPDATE datasets SET status = 'ready' WHERE id = $1",
+    "fields": [],
+    "default": null
+  },
+  "pos_learning_run_job_update_pos_model_jobs": {
+    "sql": "UPDATE pos_model_jobs SET status = 'training', updated = $1 WHERE id = $2"
+  },
+  "pos_learning_run_job_update_pos_model_jobs_2": {
+    "sql": "UPDATE pos_model_jobs SET status = 'ready', updated = $1 WHERE id = $2"
+  },
+  "pos_learning_run_job_update_pos_model_jobs_3": {
+    "sql": "UPDATE pos_model_jobs SET status = 'failed', error = $1, updated = $2 WHERE id = $3"
+  },
+  "pos_learning_settings_insert_pos_learning_settings": {
+    "sql": "INSERT INTO pos_learning_settings (store_id, auto_retrain) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET store_id = EXCLUDED.store_id, auto_retrain = EXCLUDED.auto_retrain"
+  },
+  "pos_learning_status_aggregate_pos_days": {
+    "sql": "SELECT business_date AS business_date, closed AS closed FROM pos_days WHERE store_id = $1 ORDER BY business_date DESC LIMIT 40",
+    "fields": [
+      "business_date",
+      "closed"
+    ]
+  },
+  "pos_learning_status_aggregate_pos_holidays": {
+    "sql": "SELECT date AS date, name AS name FROM pos_holidays WHERE store_id = $1 ORDER BY date ASC",
+    "fields": [
+      "date",
+      "name"
+    ]
+  },
+  "pos_learning_status_aggregate_pos_learning_settings": {
+    "sql": "SELECT auto_retrain AS auto_retrain FROM pos_learning_settings WHERE store_id = $1",
+    "fields": [
+      "auto_retrain"
+    ]
+  },
+  "pos_learning_status_aggregate_pos_model_jobs": {
+    "sql": "SELECT id AS id, store_id AS store_id, kind AS kind, status AS status, source_id AS source_id, error AS error, created AS created, updated AS updated FROM pos_model_jobs WHERE store_id = $1 ORDER BY created DESC LIMIT 20",
+    "fields": [
+      "id",
+      "store_id",
+      "kind",
+      "status",
+      "source_id",
+      "error",
+      "created",
+      "updated"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_inventory_movements": {
+    "sql": "SELECT s.business_date,SUM(-s.quantity*s.cost_paise) AS loss FROM pos_inventory_movements s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 AND s.kind='discard' GROUP BY s.business_date",
+    "fields": [
+      "business_date",
+      "loss"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_inventory_movements_2": {
+    "sql": "SELECT s.product_id,SUM(-s.quantity*s.cost_paise) AS loss FROM pos_inventory_movements s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 AND s.kind='discard' GROUP BY s.product_id",
+    "fields": [
+      "product_id",
+      "loss"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_inventory_movements_3": {
+    "sql": "SELECT COALESCE(SUM(-s.quantity*s.cost_paise),0) AS value FROM pos_inventory_movements s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 AND s.kind='discard'",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_reports_analytics_aggregate_pos_products": {
+    "sql": "SELECT product_id AS product_id, name AS name, category AS category, on_hand AS on_hand, reorder_level AS reorder_level, price_paise AS price_paise, cost_paise AS cost_paise FROM pos_products WHERE store_id = $1",
+    "fields": [
+      "product_id",
+      "name",
+      "category",
+      "on_hand",
+      "reorder_level",
+      "price_paise",
+      "cost_paise"
+    ]
+  },
+  "pos_reports_analytics_aggregate_pos_return_lines": {
+    "sql": "SELECT s.product_id,SUM(s.quantity) AS qty,SUM(s.net_paise) AS net,SUM(CASE WHEN s.disposition='restock' THEN s.quantity*s.cost_paise ELSE 0 END) AS cost FROM pos_return_lines s JOIN pos_returns r ON r.id=s.return_id WHERE r.store_id=$1 AND r.business_date BETWEEN $2 AND $3 GROUP BY s.product_id",
+    "fields": [
+      "product_id",
+      "qty",
+      "net",
+      "cost"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_return_lines_2": {
+    "sql": "SELECT sale.snapshot,s.return_id,s.line_index,s.store_id,s.product_id,s.quantity,s.disposition,s.net_paise,s.tax_paise,s.cgst_paise,s.sgst_paise,s.igst_paise,s.cost_paise FROM pos_return_lines s JOIN pos_returns r ON r.id=s.return_id JOIN pos_sales sale ON sale.id=r.sale_id WHERE r.store_id=$1 AND r.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "snapshot",
+      "return_id",
+      "line_index",
+      "store_id",
+      "product_id",
+      "quantity",
+      "disposition",
+      "net_paise",
+      "tax_paise",
+      "cgst_paise",
+      "sgst_paise",
+      "igst_paise",
+      "cost_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_return_lines_3": {
+    "sql": "SELECT COALESCE(SUM(s.quantity),0) AS value FROM pos_return_lines s JOIN pos_returns r ON r.id=s.return_id WHERE r.store_id=$1 AND r.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_reports_analytics_aggregate_pos_returns": {
+    "sql": "SELECT s.business_date,SUM(s.net_paise) AS net,SUM(s.restock_cost_paise) AS cost FROM pos_returns s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 GROUP BY s.business_date",
+    "fields": [
+      "business_date",
+      "net",
+      "cost"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_returns_2": {
+    "sql": "SELECT s.snapshot FROM pos_returns s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "snapshot"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_returns_3": {
+    "sql": "SELECT COUNT(*) AS documents,COALESCE(SUM(s.net_paise),0) AS net,COALESCE(SUM(s.tax_paise),0) AS gst,COALESCE(SUM(s.total_paise),0) AS gross,COALESCE(SUM(s.restock_cost_paise),0) AS restock,COALESCE(SUM(s.discard_cost_paise),0) AS discard FROM pos_returns s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "documents",
+      "net",
+      "gst",
+      "gross",
+      "restock",
+      "discard"
+    ],
+    "default": {
+      "documents": 0,
+      "net": 0,
+      "gst": 0,
+      "gross": 0,
+      "restock": 0,
+      "discard": 0
+    }
+  },
+  "pos_reports_analytics_aggregate_pos_returns_4": {
+    "sql": "SELECT COALESCE(SUM(s.total_paise),0) AS value FROM pos_returns s JOIN pos_sales sale ON sale.id=s.sale_id WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 AND sale.customer_id=$4",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_reports_analytics_aggregate_pos_sale_lines": {
+    "sql": "SELECT s.product_id,SUM(s.quantity) AS units,SUM(s.net_paise) AS net,SUM(s.quantity*s.cost_paise) AS cost,SUM(s.regular_paise-s.paid_paise) AS discounts FROM pos_sale_lines s JOIN pos_sales sale ON sale.id=s.sale_id WHERE sale.store_id=$1 AND sale.business_date BETWEEN $2 AND $3 GROUP BY s.product_id",
+    "fields": [
+      "product_id",
+      "units",
+      "net",
+      "cost",
+      "discounts"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_sale_lines_2": {
+    "sql": "SELECT s.gst_bps,SUM(s.net_paise) AS taxable_paise,SUM(s.cgst_paise) AS cgst_paise,SUM(s.sgst_paise) AS sgst_paise,SUM(s.igst_paise) AS igst_paise FROM pos_sale_lines s JOIN pos_sales sale ON sale.id=s.sale_id WHERE sale.store_id=$1 AND sale.business_date BETWEEN $2 AND $3 GROUP BY s.gst_bps",
+    "fields": [
+      "gst_bps",
+      "taxable_paise",
+      "cgst_paise",
+      "sgst_paise",
+      "igst_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_sale_lines_3": {
+    "sql": "SELECT COALESCE(SUM(s.quantity),0) AS value FROM pos_sale_lines s JOIN pos_sales sale ON sale.id=s.sale_id WHERE sale.store_id=$1 AND sale.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "value"
+    ],
+    "default": {
+      "value": 0
+    }
+  },
+  "pos_reports_analytics_aggregate_pos_sale_offers": {
+    "sql": "SELECT s.kind,COUNT(DISTINCT s.sale_id) AS transactions,SUM(s.saving_paise) AS saving_paise FROM pos_sale_offers s JOIN pos_sales sale ON sale.id=s.sale_id WHERE sale.store_id=$1 AND sale.business_date BETWEEN $2 AND $3 GROUP BY s.kind",
+    "fields": [
+      "kind",
+      "transactions",
+      "saving_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_sales": {
+    "sql": "SELECT s.business_date,COUNT(*) AS n,SUM(s.subtotal_paise) AS net,SUM(s.cogs_paise) AS cost FROM pos_sales s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 GROUP BY s.business_date",
+    "fields": [
+      "business_date",
+      "n",
+      "net",
+      "cost"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_sales_2": {
+    "sql": "SELECT s.snapshot,s.created FROM pos_sales s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "snapshot",
+      "created"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_sales_3": {
+    "sql": "SELECT COUNT(*) AS transactions,COALESCE(SUM(s.subtotal_paise),0) AS revenue,COALESCE(SUM(s.total_paise),0) AS collected,COALESCE(SUM(s.tax_paise),0) AS gst,COALESCE(SUM(s.discount_paise),0) AS discounts,COALESCE(SUM(s.cogs_paise),0) AS cost,COUNT(DISTINCT s.customer_id) AS customers FROM pos_sales s  WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 ",
+    "fields": [
+      "transactions",
+      "revenue",
+      "collected",
+      "gst",
+      "discounts",
+      "cost",
+      "customers"
+    ],
+    "default": {
+      "transactions": 0,
+      "revenue": 0,
+      "collected": 0,
+      "gst": 0,
+      "discounts": 0,
+      "cost": 0,
+      "customers": 0
+    }
+  },
+  "pos_reports_analytics_aggregate_pos_sales_4": {
+    "sql": "SELECT c.id,c.name,c.phone,COUNT(*) AS visits,SUM(s.total_paise) AS spent_paise FROM pos_sales s JOIN pos_customers c ON c.id=s.customer_id WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 GROUP BY c.id,c.name,c.phone ORDER BY spent_paise DESC LIMIT 20",
+    "fields": [
+      "id",
+      "name",
+      "phone",
+      "visits",
+      "spent_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_analytics_aggregate_pos_shifts": {
+    "sql": "SELECT s.id,s.register_id,st.name AS cashier,s.business_date,s.opened,s.closed,s.counted_paise,s.expected_paise,s.variance_paise FROM pos_shifts s JOIN pos_staff st ON st.id=s.staff_id WHERE s.store_id=$1 AND s.business_date BETWEEN $2 AND $3 ORDER BY s.opened DESC LIMIT 100",
+    "fields": [
+      "id",
+      "register_id",
+      "cashier",
+      "business_date",
+      "opened",
+      "closed",
+      "counted_paise",
+      "expected_paise",
+      "variance_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_export_aggregate_pos_returns": {
+    "sql": "SELECT r.number,s.number AS original_invoice,r.business_date,r.net_paise,r.tax_paise,r.total_paise,r.restock_cost_paise,r.discard_cost_paise FROM pos_returns r JOIN pos_sales s ON s.id=r.sale_id WHERE r.store_id=$1 AND r.business_date BETWEEN $2 AND $3 ORDER BY r.created",
+    "fields": [
+      "number",
+      "original_invoice",
+      "business_date",
+      "net_paise",
+      "tax_paise",
+      "total_paise",
+      "restock_cost_paise",
+      "discard_cost_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_export_aggregate_pos_sales": {
+    "sql": "SELECT number,business_date,created,subtotal_paise,tax_paise,total_paise,discount_paise,cash_net_paise FROM pos_sales WHERE store_id=$1 AND business_date BETWEEN $2 AND $3 ORDER BY created",
+    "fields": [
+      "number",
+      "business_date",
+      "created",
+      "subtotal_paise",
+      "tax_paise",
+      "total_paise",
+      "discount_paise",
+      "cash_net_paise"
+    ],
+    "default": null
+  },
+  "pos_reports_print_return_aggregate_pos_returns": {
+    "sql": "SELECT snapshot AS snapshot FROM pos_returns WHERE (id = $1 AND store_id = $2)",
+    "fields": [
+      "snapshot"
+    ]
+  },
+  "pos_returns_complete_return_aggregate_pos_returns": {
+    "sql": "SELECT id AS id, store_id AS store_id, sale_id AS sale_id, number AS number, shift_id AS shift_id, staff_id AS staff_id, business_date AS business_date, created AS created, net_paise AS net_paise, tax_paise AS tax_paise, total_paise AS total_paise, cash_paise AS cash_paise, restock_cost_paise AS restock_cost_paise, discard_cost_paise AS discard_cost_paise, request_hash AS request_hash, idempotency_key AS idempotency_key, snapshot AS snapshot FROM pos_returns WHERE (store_id = $1 AND idempotency_key = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "sale_id",
+      "number",
+      "shift_id",
+      "staff_id",
+      "business_date",
+      "created",
+      "net_paise",
+      "tax_paise",
+      "total_paise",
+      "cash_paise",
+      "restock_cost_paise",
+      "discard_cost_paise",
+      "request_hash",
+      "idempotency_key",
+      "snapshot"
+    ]
+  },
+  "pos_returns_complete_return_insert_pos_return_lines": {
+    "sql": "INSERT INTO pos_return_lines (return_id, line_index, store_id, product_id, quantity, disposition, net_paise, tax_paise, cgst_paise, sgst_paise, igst_paise, cost_paise) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)"
+  },
+  "pos_returns_complete_return_insert_pos_returns": {
+    "sql": "INSERT INTO pos_returns (id, store_id, sale_id, number, shift_id, staff_id, business_date, created, net_paise, tax_paise, total_paise, cash_paise, restock_cost_paise, discard_cost_paise, request_hash, idempotency_key, snapshot) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)"
+  },
+  "pos_returns_complete_return_update_pos_sale_lines": {
+    "sql": "UPDATE pos_sale_lines SET returned = returned + $1 WHERE (sale_id = $2 AND product_id = $3)"
+  },
+  "pos_returns_sale_detail_aggregate_pos_returns": {
+    "sql": "SELECT snapshot AS snapshot FROM pos_returns WHERE sale_id = $1 ORDER BY created ASC",
+    "fields": [
+      "snapshot"
+    ]
+  },
+  "pos_returns_sale_detail_aggregate_pos_sale_lines": {
+    "sql": "SELECT product_id AS product_id, returned AS returned FROM pos_sale_lines WHERE sale_id = $1",
+    "fields": [
+      "product_id",
+      "returned"
+    ]
+  },
+  "pos_returns_sale_detail_aggregate_pos_sales": {
+    "sql": "SELECT id AS id, store_id AS store_id, number AS number, shift_id AS shift_id, staff_id AS staff_id, customer_id AS customer_id, business_date AS business_date, created AS created, subtotal_paise AS subtotal_paise, tax_paise AS tax_paise, total_paise AS total_paise, discount_paise AS discount_paise, cogs_paise AS cogs_paise, cash_net_paise AS cash_net_paise, request_hash AS request_hash, idempotency_key AS idempotency_key, snapshot AS snapshot FROM pos_sales WHERE (id = $1 AND store_id = $2)",
+    "fields": [
+      "id",
+      "store_id",
+      "number",
+      "shift_id",
+      "staff_id",
+      "customer_id",
+      "business_date",
+      "created",
+      "subtotal_paise",
+      "tax_paise",
+      "total_paise",
+      "discount_paise",
+      "cogs_paise",
+      "cash_net_paise",
+      "request_hash",
+      "idempotency_key",
+      "snapshot"
+    ]
+  },
+  "pos_test_confirmed_conditional_offer_and_promotion_safe_return_update_promotion_calendar_revisions": {
+    "sql": "UPDATE promotion_calendar_revisions SET revision = 2"
+  },
+  "pos_test_confirmed_conditional_offer_and_promotion_safe_return_update_promotion_events": {
+    "sql": "UPDATE promotion_events SET active = 0"
+  },
+  "pos_test_daily_model_links_to_current_pos_calendar_insert_demand_datasets": {
+    "sql": "INSERT INTO demand_datasets (id, name, quality, created) VALUES ($1, $2, $3, $4)"
+  },
+  "promotions_advance_upsert_promotion_calendar_revisions": {
+    "sql": "INSERT INTO promotion_calendar_revisions (...) VALUES (...) ON CONFLICT (workspace) DO UPDATE SET revision = promotion_calendar_revisions.revision + 1"
+  },
+  "promotions_calendar_snapshot_aggregate_confirmed_promotions": {
+    "sql": "SELECT id AS id, workspace AS workspace, name AS name, status AS status, request AS request, result AS result, review_token AS review_token, idempotency_key AS idempotency_key, created AS created, cancelled AS cancelled, model_id AS model_id FROM confirmed_promotions WHERE workspace = $1 ORDER BY created DESC",
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_demand_datasets": {
+    "sql": "SELECT quality AS quality FROM demand_datasets WHERE id = $1",
+    "fields": [
+      "quality"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_pos_holidays": {
+    "sql": "SELECT h.date,h.name,p.forecast_store_id AS store_id FROM pos_holidays h JOIN pos_stores p ON p.id=h.store_id WHERE p.forecast_workspace=$1 AND ($2='all' OR p.forecast_store_id=$3)",
+    "fields": [
+      "date",
+      "name",
+      "store_id"
+    ],
+    "default": null
+  },
+  "promotions_calendar_snapshot_aggregate_pos_holidays_2": {
+    "sql": "SELECT date AS date, name AS name FROM pos_holidays WHERE store_id = $1",
+    "fields": [
+      "date",
+      "name"
+    ]
+  },
+  "promotions_calendar_snapshot_aggregate_pos_stores": {
+    "sql": "SELECT id AS id, name AS name, address AS address, state_code AS state_code, gstin AS gstin, gst_registered AS gst_registered, currency AS currency, timezone AS timezone, demo AS demo, forecast_workspace AS forecast_workspace, forecast_store_id AS forecast_store_id, promo_reference_date AS promo_reference_date, revision AS revision, created AS created FROM pos_stores WHERE id = $1",
+    "fields": [
+      "id",
+      "name",
+      "address",
+      "state_code",
+      "gstin",
+      "gst_registered",
+      "currency",
+      "timezone",
+      "demo",
+      "forecast_workspace",
+      "forecast_store_id",
+      "promo_reference_date",
+      "revision",
+      "created"
+    ]
+  },
+  "promotions_cancel_aggregate_confirmed_promotions": {
+    "sql": "SELECT id AS id, workspace AS workspace, name AS name, status AS status, request AS request, result AS result, review_token AS review_token, idempotency_key AS idempotency_key, created AS created, cancelled AS cancelled, model_id AS model_id FROM confirmed_promotions WHERE (id = $1 AND workspace = $2)",
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_cancel_update_confirmed_promotions": {
+    "sql": "UPDATE confirmed_promotions SET status = 'cancelled', cancelled = $1 WHERE id = $2"
+  },
+  "promotions_cancel_update_promotion_events": {
+    "sql": "UPDATE promotion_events SET active = 0 WHERE campaign_id = $1"
+  },
+  "promotions_confirm_aggregate_confirmed_promotions": {
+    "sql": "SELECT id AS id, workspace AS workspace, name AS name, status AS status, request AS request, result AS result, review_token AS review_token, idempotency_key AS idempotency_key, created AS created, cancelled AS cancelled, model_id AS model_id FROM confirmed_promotions WHERE (workspace = $1 AND idempotency_key = $2)",
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_confirm_aggregate_confirmed_promotions_2": {
+    "sql": "SELECT id AS id, workspace AS workspace, name AS name, status AS status, request AS request, result AS result, review_token AS review_token, idempotency_key AS idempotency_key, created AS created, cancelled AS cancelled, model_id AS model_id FROM confirmed_promotions WHERE id = $1",
+    "fields": [
+      "id",
+      "workspace",
+      "name",
+      "status",
+      "request",
+      "result",
+      "review_token",
+      "idempotency_key",
+      "created",
+      "cancelled",
+      "model_id"
+    ]
+  },
+  "promotions_confirm_insert_audit": {
+    "sql": "INSERT INTO audit (event, workspace, payload, created) VALUES ($1, $2, $3, $4)"
+  },
+  "promotions_confirm_insert_confirmed_promotions": {
+    "sql": "INSERT INTO confirmed_promotions (id, workspace, name, status, request, result, review_token, idempotency_key, created, cancelled, model_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)"
+  },
+  "promotions_confirm_insert_promotion_events": {
+    "sql": "INSERT INTO promotion_events (campaign_id, workspace, store_id, product_id, period_end, discount, feature, display, active) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)"
+  },
+  "promotions_revision_aggregate_promotion_calendar_revisions": {
+    "sql": "SELECT revision AS revision FROM promotion_calendar_revisions WHERE workspace = $1",
+    "fields": [
+      "revision"
+    ]
+  },
+  "pos_api_search_count": {
+    "sql": "SELECT count(*) AS total FROM pos_sales s LEFT JOIN pos_customers customer ON customer.id=s.customer_id AND customer.store_id=s.store_id WHERE s.store_id=$1 AND ($2='' OR s.business_date>=$2) AND ($3='' OR s.business_date<=$3) AND ($4='' OR strpos(lower(concat_ws(' ',s.number,s.id,customer.name,customer.phone)),lower($4))>0)",
+    "fields": [
+      "total"
+    ]
+  },
+  "pos_api_search_sales": {
+    "sql": "SELECT s.id,s.number,s.business_date,s.created,s.total_paise,s.subtotal_paise,s.tax_paise,customer.name AS customer_name,(SELECT st.name FROM pos_staff st WHERE st.id=s.staff_id AND st.store_id=s.store_id) AS cashier,COALESCE((SELECT SUM(r.total_paise) FROM pos_returns r WHERE r.sale_id=s.id AND r.store_id=s.store_id),0) AS refunded_paise FROM pos_sales s LEFT JOIN pos_customers customer ON customer.id=s.customer_id AND customer.store_id=s.store_id WHERE s.store_id=$1 AND ($2='' OR s.business_date>=$2) AND ($3='' OR s.business_date<=$3) AND ($4='' OR strpos(lower(concat_ws(' ',s.number,s.id,customer.name,customer.phone)),lower($4))>0) ORDER BY s.created DESC,s.id LIMIT $5 OFFSET $6",
+    "fields": [
+      "id",
+      "number",
+      "business_date",
+      "created",
+      "total_paise",
+      "subtotal_paise",
+      "tax_paise",
+      "customer_name",
+      "cashier",
+      "refunded_paise"
+    ]
+  }
+}

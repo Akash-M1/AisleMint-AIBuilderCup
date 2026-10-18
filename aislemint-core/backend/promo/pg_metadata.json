@@ -1,0 +1,2519 @@
+{
+  "scenarios": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "workspace",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "request",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "result",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_scenarios_workspace_created",
+        "unique": false,
+        "fields": [
+          "workspace",
+          "created"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_scenarios_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "audit": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "event",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "workspace",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "payload",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": []
+  },
+  "datasets": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "quality",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "status",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "error",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_datasets_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "demand_datasets": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "quality",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_demand_datasets_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "demand_jobs": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "source_id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "status",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "error",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "updated",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_demand_jobs_1",
+        "unique": true,
+        "fields": [
+          "source_id"
+        ]
+      }
+    ]
+  },
+  "inventory_plans": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "source_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "request",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "result",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_inventory_plans_source",
+        "unique": false,
+        "fields": [
+          "source_id",
+          "created"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_inventory_plans_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "confirmed_promotions": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "workspace",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "status",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "request",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "result",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "review_token",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "idempotency_key",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "cancelled",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "model_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_confirmed_promotions_2",
+        "unique": true,
+        "fields": [
+          "workspace",
+          "idempotency_key"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_confirmed_promotions_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "promotion_events": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "campaign_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 1,
+        "name": "workspace",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "period_end",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "discount",
+        "type": "REAL",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "feature",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "display",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "active",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_campaign_promotion_period",
+        "unique": true,
+        "fields": [
+          "campaign_id",
+          "store_id",
+          "product_id",
+          "period_end"
+        ]
+      },
+      {
+        "name": "idx_promotion_period_lookup",
+        "unique": false,
+        "fields": [
+          "workspace",
+          "store_id",
+          "product_id",
+          "period_end"
+        ]
+      }
+    ]
+  },
+  "promotion_calendar_revisions": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "workspace",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "revision",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_promotion_calendar_revisions_1",
+        "unique": true,
+        "fields": [
+          "workspace"
+        ]
+      }
+    ]
+  },
+  "pos_stores": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "address",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "state_code",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "gstin",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "gst_registered",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "currency",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": "'INR'",
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "timezone",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": "'Asia/Kolkata'",
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "demo",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "forecast_workspace",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "forecast_store_id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "promo_reference_date",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "revision",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": "1",
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_stores_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_staff": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "role",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "salt",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "pin_hash",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "active",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": "1",
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "failed_attempts",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": "0",
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "locked_until",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_staff_store",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "active"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_staff_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_sessions": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "token_hash",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "expires",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_sessions_1",
+        "unique": true,
+        "fields": [
+          "token_hash"
+        ]
+      }
+    ]
+  },
+  "pos_products": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "barcode",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "category",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "hsn",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "unit",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "price_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "cost_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "gst_bps",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "on_hand",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "reorder_level",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "active",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_products_2",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "barcode"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_products_1",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "product_id"
+        ]
+      }
+    ]
+  },
+  "pos_customers": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "phone",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "email",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "address",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "state_code",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "gstin",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_customer_phone",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "phone"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_customers_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_shifts": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "register_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "business_date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "opening_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "opened",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "closed",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "counted_paise",
+        "type": "INTEGER",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "expected_paise",
+        "type": "INTEGER",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "variance_paise",
+        "type": "INTEGER",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_open_register",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "register_id"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_shifts_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_cash_movements": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "shift_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "amount_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "reason",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_cash_movements_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_counters": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "financial_year",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "kind",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 3
+      },
+      {
+        "cid": 3,
+        "name": "value",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_counters_1",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "financial_year",
+          "kind"
+        ]
+      }
+    ]
+  },
+  "pos_sales": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "number",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "shift_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "customer_id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "business_date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "subtotal_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "tax_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "total_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "discount_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "cogs_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "cash_net_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "request_hash",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 15,
+        "name": "idempotency_key",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 16,
+        "name": "snapshot",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_sales_customer",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "customer_id",
+          "created"
+        ]
+      },
+      {
+        "name": "idx_pos_sales_store_date",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "business_date",
+          "created"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_sales_3",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "idempotency_key"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_sales_2",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "number"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_sales_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_sale_lines": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "sale_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 3,
+        "name": "quantity",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "paid_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "net_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "tax_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "cgst_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "sgst_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "igst_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "cost_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "regular_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "gst_bps",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "returned",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": "0",
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_sale_lines_1",
+        "unique": true,
+        "fields": [
+          "sale_id",
+          "product_id"
+        ]
+      }
+    ]
+  },
+  "pos_returns": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "sale_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "number",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "shift_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "business_date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "net_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "tax_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "total_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "cash_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "restock_cost_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "discard_cost_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "request_hash",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 15,
+        "name": "idempotency_key",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 16,
+        "name": "snapshot",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_returns_sale",
+        "unique": false,
+        "fields": [
+          "sale_id"
+        ]
+      },
+      {
+        "name": "idx_pos_returns_store_date",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "business_date"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_returns_3",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "idempotency_key"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_returns_2",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "number"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_returns_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_return_lines": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "return_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "line_index",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "quantity",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "disposition",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "net_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "tax_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "cgst_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "sgst_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "igst_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "cost_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_return_lines_1",
+        "unique": true,
+        "fields": [
+          "return_id",
+          "line_index"
+        ]
+      }
+    ]
+  },
+  "pos_sale_offers": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "sale_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "line_index",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "kind",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "saving_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "body",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_sale_offers_1",
+        "unique": true,
+        "fields": [
+          "sale_id",
+          "line_index"
+        ]
+      }
+    ]
+  },
+  "pos_inventory_movements": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "quantity",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "balance",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "kind",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "reference_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "reason",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "cost_paise",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "business_date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "idempotency_key",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_stock_product",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "product_id",
+          "created"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_inventory_movements_2",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "idempotency_key"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_inventory_movements_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_carts": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "body",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_carts_store",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "created"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_carts_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_events": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "sequence",
+        "type": "INTEGER",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "kind",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "reference_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "payload",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_events_store",
+        "unique": false,
+        "fields": [
+          "store_id",
+          "sequence"
+        ]
+      }
+    ]
+  },
+  "pos_days": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "business_date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "closed",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "staff_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_days_1",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "business_date"
+        ]
+      }
+    ]
+  },
+  "pos_daily": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "product_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "business_date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 3
+      },
+      {
+        "cid": 3,
+        "name": "body",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_daily_1",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "product_id",
+          "business_date"
+        ]
+      }
+    ]
+  },
+  "pos_model_jobs": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "kind",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "status",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "source_id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "error",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "updated",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "idx_pos_pending_training",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "kind"
+        ]
+      },
+      {
+        "name": "sqlite_autoindex_pos_model_jobs_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_drift_checks": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "created",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "event_sequence",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "result",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_drift_checks_1",
+        "unique": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "pos_learning_settings": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 0,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "auto_retrain",
+        "type": "INTEGER",
+        "notnull": 1,
+        "default": "0",
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_learning_settings_1",
+        "unique": true,
+        "fields": [
+          "store_id"
+        ]
+      }
+    ]
+  },
+  "pos_holidays": {
+    "fields": [
+      {
+        "cid": 0,
+        "name": "store_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "date",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 2
+      },
+      {
+        "cid": 2,
+        "name": "name",
+        "type": "TEXT",
+        "notnull": 1,
+        "default": null,
+        "pk": 0
+      }
+    ],
+    "indexes": [
+      {
+        "name": "sqlite_autoindex_pos_holidays_1",
+        "unique": true,
+        "fields": [
+          "store_id",
+          "date"
+        ]
+      }
+    ]
+  }
+}

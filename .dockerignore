@@ -1,0 +1,13 @@
+.git
+**/.git
+**/node_modules
+**/dist
+**/.wrangler
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/.env*
+**/.release
+**/*.log
+**/*.pem
+**/*.key

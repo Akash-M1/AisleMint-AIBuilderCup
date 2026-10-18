@@ -1,0 +1,14 @@
+{
+  "name": "@aislemint/promotions",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./workspace": "./components/planning-workspace.tsx",
+    "./offers": "./components/offer-editor.tsx"
+  },
+  "peerDependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}

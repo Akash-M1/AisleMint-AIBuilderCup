@@ -1,0 +1,26 @@
+# One versioned web composition; product source remains in its own repository.
+FROM node:22-bookworm-slim AS build
+WORKDIR /app/aislemint-platform/frontend
+COPY aislemint-platform/frontend/package*.json ./
+RUN npm ci
+WORKDIR /app
+COPY aislemint-platform/frontend ./aislemint-platform/frontend
+COPY aislemint-core/frontend ./aislemint-core/frontend
+COPY aislemint-admin/frontend ./aislemint-admin/frontend
+COPY aislemint-promotions/frontend ./aislemint-promotions/frontend
+COPY aislemint-demand/frontend ./aislemint-demand/frontend
+COPY aislemint-sales/frontend ./aislemint-sales/frontend
+COPY aislemint-data/frontend ./aislemint-data/frontend
+COPY aislemint-connect/frontend ./aislemint-connect/frontend
+RUN for repo in core admin promotions demand sales data connect; do ln -s ../../aislemint-platform/frontend/node_modules aislemint-$repo/frontend/node_modules; done
+WORKDIR /app/aislemint-platform/frontend
+RUN npm run build
+FROM node:22-bookworm-slim AS runtime
+WORKDIR /app
+ENV NODE_ENV=production PORT=3000
+COPY --from=build --chown=node:node /app/aislemint-platform/frontend/package*.json ./
+COPY --from=build --chown=node:node /app/aislemint-platform/frontend/node_modules ./node_modules
+COPY --from=build --chown=node:node /app/aislemint-platform/frontend/dist ./dist
+USER node
+EXPOSE 3000
+CMD ["./node_modules/.bin/vinext","start","--hostname","0.0.0.0","--port","3000"]

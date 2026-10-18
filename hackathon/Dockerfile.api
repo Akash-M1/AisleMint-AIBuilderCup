@@ -1,0 +1,20 @@
+FROM python:3.13-slim
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 AISLEMINT_WORKSPACE_ROOT=/app PYTHONPATH=/app:/app/aislemint-ops/backend
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+COPY aislemint-ops/requirements*.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements-model-lab.lock.txt
+COPY aislemint-core/backend ./aislemint-core/backend
+COPY aislemint-admin/backend ./aislemint-admin/backend
+COPY aislemint-promotions/backend ./aislemint-promotions/backend
+COPY aislemint-demand/backend ./aislemint-demand/backend
+COPY aislemint-sales/backend ./aislemint-sales/backend
+COPY aislemint-data/backend ./aislemint-data/backend
+COPY aislemint-connect/backend ./aislemint-connect/backend
+COPY aislemint-ops/backend ./aislemint-ops/backend
+COPY aislemint-ops/workspace.json ./aislemint-ops/workspace.json
+COPY hackathon ./hackathon
+RUN useradd -m demo && chown -R demo:demo /app
+USER demo
+EXPOSE 8000
+CMD ["python","-m","uvicorn","hackathon.server:app","--host","0.0.0.0","--port","8000"]
