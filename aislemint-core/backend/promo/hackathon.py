@@ -43,6 +43,13 @@ async def guard(request):
  if request.method=='POST':
   if not request.headers.get('origin'):
    raise HTTPException(403,'Demo changes require the browser origin.')
+  # Opening another page resumes a workspace; it does not create or mutate one.
+  # Authenticate on every request so expired/revoked/forged cookies stay bounded.
+  if path=='/api/demo/session':
+   p=existing_guest(request)
+   if p:
+    request.state.demo_guest=p
+    return
   identity=hashlib.sha256((request.cookies.get(auth.COOKIE) or request.headers.get('x-real-ip') or request.client.host).encode()).hexdigest()[:24]
   quota('writes:'+identity,100,60)
   quota('all-demo-writes',2000,86400)
@@ -127,12 +134,18 @@ def create_guest(response):
  response.set_cookie(auth.COOKIE,token,httponly=True,secure=os.environ.get('DEMO_LOCAL')!='1',samesite='strict',max_age=28800,path='/')
  return dict(ready=True,workspace=workspace,synthetic=True)
 
-@router.post('/session')
-def session(request:Request,response:Response):
+def existing_guest(request):
  try:
   p=auth.authenticate(request)
-  if p.get('id') and database().retail_users.find_one({'_id':p['id'],'synthetic_guest':True}):return dict(ready=True,synthetic=True)
- except HTTPException:pass
+ except HTTPException as error:
+  if error.status_code==401:return None
+  raise
+ if p.get('id') and database().retail_users.find_one({'_id':p['id'],'synthetic_guest':True}):return p
+ return None
+
+@router.post('/session')
+def session(request:Request,response:Response):
+ if getattr(request.state,'demo_guest',None) or existing_guest(request):return dict(ready=True,synthetic=True)
  return create_guest(response)
 
 @router.post('/reset')

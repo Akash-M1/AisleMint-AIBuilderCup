@@ -1,6 +1,7 @@
 'use client';
 import { Brand, BrandMark } from '@/components/brand';
 import { api } from '@/lib/api';
+import { ensureDemoSession } from '../lib/demo-session';
 import { BRAND } from '@/lib/brand';
 import { Context, type Session, type Shop } from '@/lib/retail-context';
 import { ArrowRight, LogOut, ShieldCheck, Store } from 'lucide-react';
@@ -57,7 +58,7 @@ export default function RetailPlatform({
     setSession(next);
   };
   useEffect(() => {
-    api('/demo/session', '', {}).then(refresh).catch((e) => setError(e.message)).finally(() => setLoading(false));
+    ensureDemoSession().then(refresh).catch((e) => setError(e.message)).finally(() => setLoading(false));
   }, []);
   const all =
     session?.retailers.flatMap((r) =>

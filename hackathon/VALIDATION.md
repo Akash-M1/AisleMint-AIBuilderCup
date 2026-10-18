@@ -43,3 +43,12 @@ The verifier creates new synthetic visitor sessions and confirms an oats offer i
 - Original website, platform health and tracker each returned HTTP **200** after the additive route activation. Their application images and customer data were not replaced.
 
 Do not describe local timing as deployed latency or a single smoke test as a performance benchmark. Do not claim the entire historical regression suite passed; the measured selection and known fixture exclusion are stated above.
+
+## Multi-tab rehearsal fix · 18 October 2026
+
+- Root cause: every page bootstrap consumed the eight-per-hour session-creation quota, including already authenticated guests. Current-hour startup counters were backed up and cleared in the dedicated demo database; no visitor workspaces were reset.
+- Valid synthetic sessions now resume without consuming creation/mutation quotas. Forged, expired, missing and non-demo sessions still follow the bounded creation path; explicit resets and model/training budgets remain limited. First-time browser bootstrap uses a shared Web Lock to serialize cookie creation across tabs.
+- All 15 sandbox tests passed, including 40 valid resumes, invalid-session bounds, origin enforcement and reset bounds. TypeScript checking and the production frontend build passed.
+- Deployed API revision `aibuildercup-api-00002-rtz`, API digest `sha256:df7411c9212e045b1dd066b600a25afc1d9daa9af0255e13139f640370b7cc4d`, frontend image `aibuildercup-web:20261018-3`.
+- Public HTTP check: 12 sequential plus 24 concurrent session resumes all succeeded without replacing the cookie or workspace. Five module data reads passed in parallel. Maximum observed resume time in this smoke check was 0.649 seconds; this is not a latency guarantee.
+- All seven demo-script browser tabs opened together and reached their workspace pages; OneSales displayed all 12 products and an active synthetic register. Demo, regular website, platform health and tracker returned HTTP 200. Compute settings and AI budgets were unchanged.

@@ -8,6 +8,48 @@ from promo.hackathon import assert_isolated,transform
 from hackathon.catalog import history,products
 
 
+@pytest.mark.parametrize('cookie_state',['valid','expired','forged','non-demo','missing'])
+def test_reopening_demo_pages_resumes_only_authenticated_guests(monkeypatch,cookie_state):
+ import asyncio
+ from collections import Counter
+ from types import SimpleNamespace
+ from fastapi import HTTPException,Response
+ from starlette.requests import Request
+ from promo import hackathon
+ monkeypatch.setattr(hackathon,'assert_isolated',lambda:None)
+ def authenticate(request):
+  if cookie_state in ('expired','forged','missing'):raise HTTPException(401,'Invalid session')
+  return {'id':'guest'}
+ monkeypatch.setattr(hackathon.auth,'authenticate',authenticate)
+ monkeypatch.setattr(hackathon,'database',lambda:SimpleNamespace(retail_users=SimpleNamespace(find_one=lambda query: {'id':'guest'} if cookie_state=='valid' else None)))
+ counts=Counter()
+ def quota(bucket,limit,seconds=3600):
+  counts[bucket]+=1
+  if counts[bucket]>limit:raise HTTPException(429,'capacity')
+ monkeypatch.setattr(hackathon,'quota',quota)
+ def request(path='/api/demo/session',origin=True):
+  headers=[] if cookie_state=='missing' else [(b'cookie',b'hindsight_session=fixture')]
+  if origin:headers.append((b'origin',b'https://aibuildercup.aislemint.com'))
+  return Request({'type':'http','method':'POST','path':path,'headers':headers,'client':('127.0.0.1',1234),'scheme':'https','server':('test',443),'query_string':b''})
+ if cookie_state=='valid':
+  monkeypatch.setattr(hackathon,'create_guest',lambda response:pytest.fail('Resume must not clone a workspace'))
+  for _ in range(40):
+   req=request();asyncio.run(hackathon.guard(req))
+   assert hackathon.session(req,Response())['ready']
+  assert not counts
+ else:
+  for _ in range(8):asyncio.run(hackathon.guard(request()))
+  with pytest.raises(HTTPException) as blocked:asyncio.run(hackathon.guard(request()))
+  assert blocked.value.status_code==429
+ # The browser-origin check and reset mutation quotas still apply to valid guests.
+ with pytest.raises(HTTPException) as blocked:asyncio.run(hackathon.guard(request(origin=False)))
+ assert blocked.value.status_code==403
+ counts.clear()
+ for _ in range(8):asyncio.run(hackathon.guard(request('/api/demo/reset')))
+ with pytest.raises(HTTPException) as blocked:asyncio.run(hackathon.guard(request('/api/demo/reset')))
+ assert blocked.value.status_code==429
+
+
 def test_demo_requires_explicit_mode(monkeypatch):
  monkeypatch.delenv('AISLEMINT_HACKATHON',raising=False)
  with pytest.raises(RuntimeError):assert_isolated()

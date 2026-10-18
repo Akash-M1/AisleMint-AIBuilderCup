@@ -49,6 +49,8 @@ Mode and parsed database connection-name checks fail closed. AI-key updates, mem
 
 Application quotas are stored in the demo database and survive API restarts. They apply to guest creation, mutation volume, training and actual model attempts. A reset does not reset global quotas. Review cost and storage retention after judging; automatic deletion of old visitor workspaces is not enabled.
 
+Opening another page with a valid synthetic guest session resumes the existing workspace without consuming creation or mutation quotas. Authentication still checks session expiry and revocation on every request. New/invalid sessions and explicit resets remain bounded. Browser Web Locks serialize first-time session creation across tabs so the cookie establishes one shared workspace before the other pages resume it.
+
 ## Recovery
 
 - Roll the new Cloud Run service back to its previous tested image digest; do not change the production API service.
